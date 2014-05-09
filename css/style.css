@@ -25,7 +25,7 @@ input[type="submit"], input[type="button"], button { -webkit-appearance: none; -
 
 ::-moz-focus-inner { border: 0; }
 
-label { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; outline-style: none; cursor: pointer; }
+label { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; outline-style: none; }
 
 html { position: relative; min-height: 100%; }
 
@@ -38,15 +38,12 @@ label[for] { cursor: pointer; line-height: 28px; display: block; }
 input[type="text"], input[type="date"], input[type="number"], input[type="email"] { -webkit-transition: all 0.1s ease; -moz-transition: all 0.1s ease; transition: all 0.1s ease; border-radius: 6px; padding: 10px 15px; height: 48px; font-size: 18px; line-height: 28px; }
 input[type="text"]:hover, input[type="text"]:focus, input[type="date"]:hover, input[type="date"]:focus, input[type="number"]:hover, input[type="number"]:focus, input[type="email"]:hover, input[type="email"]:focus { outline: none; background: #eee8d5; }
 
-.form-validate { background-color: #d33682; }
+.form-validate__fieldset__row__input-inline-group:before, .form-validate__fieldset__row__input-inline-group:after { content: " "; display: table; }
+.form-validate__fieldset__row__input-inline-group:after { clear: both; }
 
-.form-validate__fieldset { background-color: #2aa198; }
+.form-validate__fieldset__row__input__radio { cursor: pointer; float: left; margin-right: 10px; }
 
-.form-validate__fieldset__row { background-color: #dc322f; }
-
-.form-validate__fieldset__row__label { background-color: #6c71c4; }
-
-.form-validate__fieldset__row__input { background-color: #268bd2; }
+.form-validate__fieldset__row__input__radio__input { margin-right: 5px; }
 
 @media screen and (max-width: 719px) { .form-validate__fieldset { padding: 0 20px; } }
 @media screen and (min-width: 720px) and (max-width: 959px) { .inner { width: 720px; }

@@ -7,10 +7,18 @@
 }
 
 .form-validate__fieldset__row {
+	@include clearfix;
+	padding: 6px 0;
 }
 
 .form-validate__fieldset__row__label {
+	float: left;
+	width: 200px;
+	padding-right: 10px;
+	text-align: right;
 }
 
 .form-validate__fieldset__row__input {
+	float: left;
+	width: 520px;
 }

@@ -8,6 +8,7 @@
 
 .form-validate__fieldset__row {
 	@include clearfix;
+	padding: 6px 0;
 }
 
 .form-validate__fieldset__row__label {

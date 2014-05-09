@@ -27,7 +27,7 @@
 		<h1>Validate</h1>
 
 
-		<form action="#" class="form-validate">
+		<form action="#" class="form-validate" novalidate>
 
 			<fieldset class="form-validate__fieldset">
 
@@ -37,15 +37,13 @@
 						<label for="first-name">First name</label>
 					</div>
 					<div class="form-validate__fieldset__row__input">
-						<input type="text" name="first-name" id="first-name" />
+						<input type="text" name="first-name" id="first-name" required />
 					</div>
-				</div>
+				</div> 
 
+				<input type="submit" value="Submit" />
 
 			</fieldset>
-
-
-			<input type="submit" value="Submit" />
 
 		</form>
 
@@ -53,8 +51,15 @@
 	</div>
 
 	<!-- Javascript -->
-<!-- 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="../js/jquery-1.11.0.min.js"><\/script>')</script> -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="../js/jquery-1.11.0.min.js"><\/script>')</script>
+
+	<script src="../js/form-validate.js"></script>
+	<script>
+		$('.form-validate').formValidate({
+			language: 'de'
+		});
+	</script>
 
 </body>
 </html>

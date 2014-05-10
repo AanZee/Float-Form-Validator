@@ -39,7 +39,7 @@
 					<div class="form-validate__fieldset__row__input">
 						<input type="text" name="first-name" id="first-name" required />
 					</div>
-				</div> 
+				</div>
 
 				<input type="submit" value="Submit" />
 
@@ -56,6 +56,9 @@
 
 	<script src="../js/form-validate.js"></script>
 	<script>
+
+		$.validator.messages.required = "Dit veld is verplicht";
+
 		$('.form-validate').formValidate({
 			language: 'de'
 		});

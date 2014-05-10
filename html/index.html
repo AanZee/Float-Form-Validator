@@ -32,12 +32,22 @@
 			<fieldset class="form-validate__fieldset">
 
 
-				<div class="form-validate__fieldset__row">
+				<div class="form-validate__fieldset__row form-validate__fieldset__row-group form-validate__fieldset__row-required">
 					<div class="form-validate__fieldset__row__label">
-						<label for="first-name">First name</label>
+						<label>Salution</label>
+					</div>
+					<div class="form-validate__fieldset__row__input form-validate__fieldset__row__input-inline-group">
+						<label class="form-validate__fieldset__row__input__radio"><input type="radio" name="salutation" id="salutation_mister" value="mister" required class="form-validate__fieldset__row__input__radio__input">Mister</label>
+						<label class="form-validate__fieldset__row__input__radio"><input type="radio" name="salutation" id="salutation_miss" value="miss" required class="form-validate__fieldset__row__input__radio__input">Miss</label>
+					</div>
+				</div>
+
+				<div class="form-validate__fieldset__row form-validate__fieldset__row-required">
+					<div class="form-validate__fieldset__row__label">
+						<label for="full-name">Full name</label>
 					</div>
 					<div class="form-validate__fieldset__row__input">
-						<input type="text" name="first-name" id="first-name" required />
+						<input type="text" name="full-name" id="full-name" required />
 					</div>
 				</div>
 

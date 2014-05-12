@@ -31,7 +31,9 @@
         this.init();
     }
 
-
+    /**
+     * Default plugin settings
+     */
     FormValidator.defaults = {
     	messages: {},
     	groups: {},
@@ -42,8 +44,19 @@
     };
 
     FormValidator.messages = {
-    	required: "This field is required"
+    	required: "This field is required",
+    	email: "This is not a (correct) email address"
     };
+
+    FormValidator.methods = {
+    	/**
+    	 * Checks for empty values
+    	 * @param {string} value 
+    	 */
+    	required: function(value) {
+    		return $.trim(value).length > 0;
+    	}
+    }
 
     // http://jqueryvalidation.org/jQuery.validator.setDefaults/
     FormValidator.setDefaults = function( settings ) {
@@ -57,10 +70,6 @@
 
         // Load all fields
         this.elements = this.findElements();
-
-        // Load messages
-        console.log(this);
-        //this.defaults.messages = this.messages;
 
         // Load events
         this.loadEvents();

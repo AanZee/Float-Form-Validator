@@ -1,0 +1,13 @@
+.flt-form__mainbox-inline-group {
+	@include clearfix;
+}
+
+.flt-form__radio-label {
+	cursor: pointer;
+	float: left;
+	margin-right: 10px;
+}
+
+.flt-form__radio-input {
+	margin-right: 5px;
+}

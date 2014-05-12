@@ -2,6 +2,7 @@
  *  Project: float.form-validate.js
  *  Description: A plugin that can validate form fields
  *  Author: Aan Zee (frontend@aanzee.nl)
+ *  GitHub: https://github.com/AanZee/validate
  *  Version: 0.0.1
  *  License: MIT
  */

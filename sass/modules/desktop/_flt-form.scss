@@ -1,0 +1,21 @@
+.flt-form {
+	width: 720px;
+	margin: 0 auto;
+}
+
+.flt-form__row {
+	@include clearfix;
+	padding: 6px 0;
+}
+
+.flt-form__subbox {
+	float: left;
+	width: 200px;
+	padding-right: 10px;
+	text-align: right;
+}
+
+.flt-form__mainbox {
+	float: right;
+	width: 520px;
+}

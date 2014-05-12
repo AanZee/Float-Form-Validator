@@ -33,34 +33,34 @@ body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 1
 
 .inner { margin: 0 auto; position: relative; height: inherit; min-height: inherit; background-color: #839496; }
 
-label[for] { cursor: pointer; line-height: 28px; display: block; }
+.flt-form label[for] { cursor: pointer; line-height: 28px; display: block; }
 
-input[type="text"], input[type="date"], input[type="number"], input[type="email"] { -webkit-transition: all 0.1s ease; -moz-transition: all 0.1s ease; transition: all 0.1s ease; border-radius: 6px; padding: 10px 15px; height: 48px; font-size: 18px; line-height: 28px; }
-input[type="text"]:hover, input[type="text"]:focus, input[type="date"]:hover, input[type="date"]:focus, input[type="number"]:hover, input[type="number"]:focus, input[type="email"]:hover, input[type="email"]:focus { outline: none; background: #eee8d5; }
+.flt-form__text-input, .flt-form__email-input, .flt-form__tel-input { -webkit-transition: all 0.1s ease; -moz-transition: all 0.1s ease; transition: all 0.1s ease; border-radius: 6px; padding: 10px 15px; height: 48px; font-size: 18px; line-height: 28px; }
+.flt-form__text-input:hover, .flt-form__text-input:focus, .flt-form__email-input:hover, .flt-form__email-input:focus, .flt-form__tel-input:hover, .flt-form__tel-input:focus { outline: none; background: #eee8d5; }
 
-.form-validate__fieldset__row__input-inline-group:before, .form-validate__fieldset__row__input-inline-group:after { content: " "; display: table; }
-.form-validate__fieldset__row__input-inline-group:after { clear: both; }
+.flt-form__mainbox-inline-group:before, .flt-form__mainbox-inline-group:after { content: " "; display: table; }
+.flt-form__mainbox-inline-group:after { clear: both; }
 
-.form-validate__fieldset__row__input__radio { cursor: pointer; float: left; margin-right: 10px; }
+.flt-form__radio-label { cursor: pointer; float: left; margin-right: 10px; }
 
-.form-validate__fieldset__row__input__radio__input { margin-right: 5px; }
+.flt-form__radio-input { margin-right: 5px; }
 
-@media screen and (max-width: 719px) { .form-validate__fieldset { padding: 0 20px; } }
+@media screen and (max-width: 719px) { .flt-form__fieldset { padding: 0 20px; } }
 @media screen and (min-width: 720px) and (max-width: 959px) { .inner { width: 720px; }
-  .form-validate { width: 720px; margin: 0 auto; }
-  .form-validate__fieldset__row { padding: 6px 0; }
-  .form-validate__fieldset__row:before, .form-validate__fieldset__row:after { content: " "; display: table; }
-  .form-validate__fieldset__row:after { clear: both; }
-  .form-validate__fieldset__row__label { float: left; width: 200px; padding-right: 10px; text-align: right; }
-  .form-validate__fieldset__row__input { float: left; width: 520px; }
-  label[for] { margin: 10px 0; }
-  input[type="text"], input[type="date"], input[type="number"], input[type="email"] { width: 400px; } }
+  .flt-form { width: 720px; margin: 0 auto; }
+  .flt-form__row { padding: 6px 0; }
+  .flt-form__row:before, .flt-form__row:after { content: " "; display: table; }
+  .flt-form__row:after { clear: both; }
+  .flt-form__subbox { float: left; width: 200px; padding-right: 10px; text-align: right; }
+  .flt-form__mainbox { float: left; width: 520px; }
+  .flt-form label[for] { margin: 10px 0; }
+  .flt-form__text-input, .flt-form__email-input, .flt-form__tel-input { width: 400px; } }
 @media screen and (min-width: 960px) { .inner { width: 920px; }
-  .form-validate { width: 720px; margin: 0 auto; }
-  .form-validate__fieldset__row { padding: 6px 0; }
-  .form-validate__fieldset__row:before, .form-validate__fieldset__row:after { content: " "; display: table; }
-  .form-validate__fieldset__row:after { clear: both; }
-  .form-validate__fieldset__row__label { float: left; width: 200px; padding-right: 10px; text-align: right; }
-  .form-validate__fieldset__row__input { float: left; width: 520px; }
-  label[for] { margin: 10px 0; }
-  input[type="text"], input[type="date"], input[type="number"], input[type="email"] { width: 400px; } }
+  .flt-form { width: 720px; margin: 0 auto; }
+  .flt-form__row { padding: 6px 0; }
+  .flt-form__row:before, .flt-form__row:after { content: " "; display: table; }
+  .flt-form__row:after { clear: both; }
+  .flt-form__subbox { float: left; width: 200px; padding-right: 10px; text-align: right; }
+  .flt-form__mainbox { float: right; width: 520px; }
+  .flt-form label[for] { margin: 10px 0; }
+  .flt-form__text-input, .flt-form__email-input, .flt-form__tel-input { width: 400px; } }

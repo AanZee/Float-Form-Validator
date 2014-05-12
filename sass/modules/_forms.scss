@@ -1,13 +1,14 @@
-label[for] {
-	cursor: pointer;
-	line-height: 28px;
-	display: block;
+.flt-form {
+	label[for] {
+		cursor: pointer;
+		line-height: 28px;
+		display: block;
+	}
 }
 
-input[type="text"],
-input[type="date"],
-input[type="number"],
-input[type="email"] {
+.flt-form__text-input,
+.flt-form__email-input,
+.flt-form__tel-input {
 	@include transition(all 0.1s ease);
 	border-radius: $border-radius;
 	padding: 10px 15px;

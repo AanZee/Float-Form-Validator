@@ -1,24 +1,21 @@
-.form-validate {
+.flt-form {
 	width: 720px;
 	margin: 0 auto;
 }
 
-.form-validate__fieldset {
-}
-
-.form-validate__fieldset__row {
+.flt-form__row {
 	@include clearfix;
 	padding: 6px 0;
 }
 
-.form-validate__fieldset__row__label {
+.flt-form__subbox {
 	float: left;
 	width: 200px;
 	padding-right: 10px;
 	text-align: right;
 }
 
-.form-validate__fieldset__row__input {
+.flt-form__mainbox {
 	float: left;
 	width: 520px;
 }

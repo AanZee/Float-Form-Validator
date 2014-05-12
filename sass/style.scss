@@ -6,20 +6,20 @@
 
 @import "modules/modules";
 @import "modules/forms";
-@import "modules/form-validate";
+@import "modules/flt-form";
 
 
 // mobile view
 @media screen and (max-width: $tablet_width - 1) {
 	@import "modules/mobile/modules";
-	@import "modules/mobile/form-validate";
+	@import "modules/mobile/flt-form";
 }
 
 
 // tablet view
 @media screen and (min-width: $tablet_width) and (max-width: $desktop_width - 1) {
 	@import "modules/tablet/modules";
-	@import "modules/tablet/form-validate";
+	@import "modules/tablet/flt-form";
 	@import "modules/tablet/forms";
 }
 
@@ -27,6 +27,6 @@
 // desktop view
 @media screen and (min-width: $desktop_width) {
 	@import "modules/desktop/modules";
-	@import "modules/desktop/form-validate";
+	@import "modules/desktop/flt-form";
 	@import "modules/desktop/forms";
 }

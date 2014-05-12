@@ -1,10 +1,11 @@
-label[for] {
-	margin: 10px 0;
+.flt-form {
+	label[for] {
+		margin: 10px 0;
+	}
 }
 
-input[type="text"],
-input[type="date"],
-input[type="number"],
-input[type="email"] {
+.flt-form__text-input,
+.flt-form__email-input,
+.flt-form__tel-input {
 	width: 400px;
 }

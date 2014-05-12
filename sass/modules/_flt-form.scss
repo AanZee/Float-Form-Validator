@@ -1,13 +1,30 @@
+.flt-form {
+	font-size: 16px;
+}
+
+.flt-form__fieldset {
+	margin: 40px 0;
+}
+
+.flt-form__label {
+	font-weight: bold;
+	line-height: 24px;
+	display: block;
+}
+
 .flt-form__mainbox-inline-group {
 	@include clearfix;
 }
 
-.flt-form__radio-label {
+.flt-form__radio-label,
+.flt-form__checkbox-label {
 	cursor: pointer;
 	float: left;
 	margin-right: 10px;
+	line-height: 24px;
 }
 
-.flt-form__radio-input {
+.flt-form__radio-input,
+.flt-form__checkbox-input {
 	margin-right: 5px;
 }

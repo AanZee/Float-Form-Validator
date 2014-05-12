@@ -1,11 +1,6 @@
-.flt-form {
-	label[for] {
-		margin: 10px 0;
-	}
-}
-
-.flt-form__text-input,
-.flt-form__email-input,
-.flt-form__tel-input {
+.flt-form__input {
 	width: 400px;
+	&.flt-form__input-xs { width: 100px; }
+	&.flt-form__input-s {  width: 200px; }
+	&.flt-form__input-m {  width: 300px; }
 }

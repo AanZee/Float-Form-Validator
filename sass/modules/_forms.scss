@@ -1,19 +1,15 @@
 .flt-form {
 	label[for] {
 		cursor: pointer;
-		line-height: 28px;
-		display: block;
 	}
 }
 
-.flt-form__text-input,
-.flt-form__email-input,
-.flt-form__tel-input {
+.flt-form__input {
 	@include transition(all 0.1s ease);
 	border-radius: $border-radius;
 	padding: 10px 15px;
 	height: 48px;
-	font-size: 18px;
+	font-size: 16px;
 	line-height: 28px;
 	&:hover,
 	&:focus {

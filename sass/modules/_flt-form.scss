@@ -1,5 +1,8 @@
 .flt-form {
 	font-size: 16px;
+	label[for] {
+		cursor: pointer;
+	}
 }
 
 .flt-form__fieldset {
@@ -14,6 +17,20 @@
 
 .flt-form__mainbox-inline-group {
 	@include clearfix;
+}
+
+.flt-form__input {
+	@include transition(all 0.1s ease);
+	border-radius: $border-radius;
+	padding: 10px 15px;
+	height: 48px;
+	font-size: 16px;
+	line-height: 28px;
+	&:hover,
+	&:focus {
+		outline: none;
+		background: $base2;
+	}
 }
 
 .flt-form__radio-label,

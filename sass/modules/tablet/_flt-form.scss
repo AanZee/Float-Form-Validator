@@ -15,6 +15,11 @@
 	text-align: right;
 }
 
+.flt-form__mainbox {
+	float: right;
+	width: 520px;
+}
+
 .flt-form__label,
 .flt-form__radio-label,
 .flt-form__checkbox-label {
@@ -22,7 +27,9 @@
 	margin-bottom: 12px;
 }
 
-.flt-form__mainbox {
-	float: right;
-	width: 520px;
+.flt-form__input {
+	width: 400px;
+	&.flt-form__input-xs { width: 100px; }
+	&.flt-form__input-s {  width: 200px; }
+	&.flt-form__input-m {  width: 300px; }
 }

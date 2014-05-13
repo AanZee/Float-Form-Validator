@@ -42,6 +42,7 @@
     	errorClass: "error",
     	validClass: "valid",
     	errorElement: "label",
+        rowClass: "flt-form__row"
     };
 
     FormValidator.messages = {
@@ -115,9 +116,41 @@
         	}
 
         	for(var i=0; i < _this.elements.length; i++) {
-        		$(_this.elements[i]).val(_this.settings.messages.required);
+        		// $(_this.elements[i]).val(_this.settings.messages.required);
+                var $element = $(_this.elements[i]);
+                var $formRow = $element.closest('.' + _this.settings.rowClass);
+
+                var errorElement;
+                var formRowError = $formRow.attr('data-error-placement');
+
+                if (typeof formRowError !== 'undefined' && formRowError !== false ) {
+                    _this.setErrors($formRow, formRowError);
+                } else {
+                    errorElement = $formRow).find('[data-error-placement]').attr('data-error-placement');
+                    _this.setErrors($formRow).find('[data-error-placement]'), errorElement);
+                }
         	}
         });
+
+    };
+
+    FormValidator.prototype.setErrors = function($element, insert) {
+        var _this = this;
+        var $error = $('<p class="flt-form__error-message">' + _this.settings.messages.required + '</p>')
+        
+        switch(insert) {
+            case 'append':
+                $element.append($error);
+                break;
+            case 'after':
+                $element.after($error);
+                break;
+            case 'before':
+                $element.before($error);
+                break;
+            default:
+                $element.prepend($error);
+        }
 
     };
 

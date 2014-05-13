@@ -45,3 +45,12 @@
 .flt-form__checkbox-input {
 	margin-right: 5px;
 }
+
+.flt-form__error-message {
+	background-color: lighten($red, 30%);
+	color: $red;
+	margin: 5px 0;
+	padding: 5px 10px;
+	max-width: 400px;
+	border-radius: $border-radius;
+}

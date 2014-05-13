@@ -1,6 +1,6 @@
 @mixin transparent-bg($color, $opacity) {
-	background: $color;
-	background: rgba($color, $opacity);
+	background-color: $color;
+	background-color: rgba($color, $opacity);
 }
 
 

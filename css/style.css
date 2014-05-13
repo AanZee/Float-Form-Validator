@@ -50,6 +50,8 @@ body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 1
 
 .flt-form__radio-input, .flt-form__checkbox-input { margin-right: 5px; }
 
+.flt-form__error-message { background-color: #f2b3b2; color: #dc322f; margin: 5px 0; padding: 5px 10px; max-width: 400px; border-radius: 6px; }
+
 @media screen and (max-width: 719px) { .flt-form__fieldset { padding: 0 20px; }
   .flt-form__input { width: 100%; max-width: 400px; }
   .flt-form__input.flt-form__input-xs { max-width: 100px; }

@@ -126,8 +126,8 @@
                 if (typeof formRowError !== 'undefined' && formRowError !== false ) {
                     _this.setErrors($formRow, formRowError);
                 } else {
-                    errorElement = $formRow).find('[data-error-placement]').attr('data-error-placement');
-                    _this.setErrors($formRow).find('[data-error-placement]'), errorElement);
+                    errorElement = $formRow.find('[data-error-placement]').attr('data-error-placement');
+                    _this.setErrors($formRow.find('[data-error-placement]'), errorElement);
                 }
         	}
         });

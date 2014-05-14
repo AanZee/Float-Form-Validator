@@ -32,6 +32,7 @@
         this.init();
     }
 
+
     /**
      * Default plugin settings
      */
@@ -45,10 +46,12 @@
         rowClass: "flt-form__row"
     };
 
+
     FormValidator.messages = {
     	required: "This field is required",
     	email: "This is not a (correct) email address"
     };
+
 
     FormValidator.methods = {
     	/**
@@ -60,15 +63,23 @@
     	}
     }
 
+
     // http://jqueryvalidation.org/jQuery.validator.setDefaults/
     FormValidator.setDefaults = function( settings ) {
     	$.extend( FormValidator.defaults, settings );
     };
 
+
     /**
      * Initializer
      */
     FormValidator.prototype.init = function () {
+
+        //Add novalidate if HTML5
+        this.$form.attr( "novalidate", "novalidate" );
+
+        // Add aria rules for screen readers
+        this.$form.find("[required]").attr("aria-required", "true");
 
         // Load all fields
         this.elements = this.findElements();
@@ -76,6 +87,7 @@
         // Load events
         this.loadEvents();
     };
+
 
     /**
      * Inits all the elements
@@ -103,6 +115,7 @@
 					});
     };
 
+
     /**
      * Inits all the events on the elements
      */
@@ -119,20 +132,21 @@
         		// $(_this.elements[i]).val(_this.settings.messages.required);
                 var $element = $(_this.elements[i]);
                 var $formRow = $element.closest('.' + _this.settings.rowClass);
+                var $errorElement = $formRow.find('[data-error-placement]');
 
-                var errorElement;
+                var errorElement = $errorElement.attr('data-error-placement');
                 var formRowError = $formRow.attr('data-error-placement');
 
                 if (typeof formRowError !== 'undefined' && formRowError !== false ) {
                     _this.setErrors($formRow, formRowError);
                 } else {
-                    errorElement = $formRow.find('[data-error-placement]').attr('data-error-placement');
-                    _this.setErrors($formRow.find('[data-error-placement]'), errorElement);
+                    _this.setErrors($errorElement, errorElement);
                 }
         	}
         });
 
     };
+
 
     FormValidator.prototype.setErrors = function($element, insert) {
         var _this = this;
@@ -153,6 +167,7 @@
         }
 
     };
+
 
     /** jQuery plugin wrapper */
     $.fn.formValidate = function ( options ) {
@@ -189,6 +204,7 @@
             });
         }
     };
+
 
     /** Also publish the class in the $ namespace */
     $.validator = FormValidator;

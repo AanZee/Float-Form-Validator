@@ -133,7 +133,7 @@
                 var $element = $(_this.elements[i]);
                 var $formRow = $element.closest('.' + _this.settings.rowClass);
                 var $errorElement = $formRow.find('[data-error-placement]');
-
+                
                 var errorElement = $errorElement.attr('data-error-placement');
                 var formRowError = $formRow.attr('data-error-placement');
 
@@ -143,6 +143,8 @@
                     _this.setErrors($errorElement, errorElement);
                 }
         	}
+
+            return false;
         });
 
     };

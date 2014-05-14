@@ -8,21 +8,21 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 18px;
 	line-height: 1.5;
-	color: $black;
+	color: $base02;
 	word-wrap: break-word;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: none;
 	min-width: 320px;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	background: $base01;
+	background: $base1;
 }
 
 
 .inner  {
-	margin: 0 auto;
+	margin: 40px auto;
 	position: relative;
 	height: inherit;
 	min-height: inherit;
-	background-color: $base0;
+	background-color: $base3;
 }

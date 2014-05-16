@@ -23,19 +23,21 @@
 
 	<div class="inner">
 
-
-		<h1 class="flt-form__title">Float form</h1>
+		<div class="flt-form__intro">
+			<h1 class="flt-form__title">Float form</h1>
+			<p>This plugin can be used to validate forms and is part of Aan&nbsp;Zee's <a href="https://github.com/AanZee/Float">Float&nbsp;Frontend&nbsp;Library</a></p>
+		</div>
 
 
 		<form action="#" class="flt-form">
 
 			<fieldset class="flt-form__fieldset">
 
-				<h2 class="flt-form__subtitle">Your contact information</h2>
+				<h2 class="flt-form__subtitle">Personal information</h2>
 
 				<div class="flt-form__row flt-form__row-required" data-error-placement="prepend">
 					<div class="flt-form__subbox">
-						<label class="flt-form__label">Salution</label>
+						<label class="flt-form__label flt-form__label-required">Salution</label>
 					</div>
 					<div class="flt-form__mainbox flt-form__mainbox-inline-group">
 						<label class="flt-form__radio-label"><input type="radio" name="salutation" id="salutation_mister" value="mister" required class="flt-form__radio-input"><span class="flt-form__input-indicator"></span>Mister</label>
@@ -45,29 +47,43 @@
 
 				<div class="flt-form__row flt-form__row-required">
 					<div class="flt-form__subbox">
-						<label class="flt-form__label" for="full-name">Full name</label>
+						<label class="flt-form__label flt-form__label-required flt-form__label flt-form__label-error" for="full-name">Full name</label>
 					</div>
 					<div class="flt-form__mainbox" data-error-placement="append">
-						<input type="text" name="full-name" id="full-name" class="flt-form__input flt-form__text-input" required />
+						<input type="text" name="full-name" id="full-name" class="flt-form__input flt-form__input-error flt-form__number-input" required autocomplete="off" autocorrect="off" spellcheck="false" />
+						<div class="flt-form__error-box">
+							<p class="flt-form__error-message">Dit is een verplicht veld</p>
+						</div>
 					</div>
 				</div>
 
 				<div class="flt-form__row flt-form__row-required">
 					<div class="flt-form__subbox">
-						<label class="flt-form__label" for="emailaddress">Email address</label>
+						<label class="flt-form__label flt-form__label-required" for="age">Age</label>
 					</div>
-					<div class="flt-form__mainbox">
-						<input type="email" name="emailaddress" id="emailaddress" class="flt-form__input flt-form__input-m flt-form__email-input" data-error-placement="after" required />
-						<p class="flt-form__description">Put your description here</p>
+					<div class="flt-form__mainbox" data-error-placement="append">
+						<input type="text" pattern="[0-9]*" name="age" id="age" class="flt-form__input flt-form__input-xs" maxlength="3">
+						<div class="flt-form__error-box">
+							<p class="flt-form__error-message">Dit is een verplicht veld</p>
+						</div>
 					</div>
 				</div>
 
 				<div class="flt-form__row flt-form__row-required">
 					<div class="flt-form__subbox">
-						<label class="flt-form__label" for="phonenumber">Phone number</label>
+						<label class="flt-form__label flt-form__label-required" for="emailaddress">Email address</label>
 					</div>
 					<div class="flt-form__mainbox">
-						<input type="tel" name="phonenumber" id="phonenumber" class="flt-form__input flt-form__tel-input flt-form__input-s" required />
+						<input type="email" name="emailaddress" id="emailaddress" class="flt-form__input flt-form__input-l flt-form__email-input" data-error-placement="after" required autocomplete="off" autocorrect="off" spellcheck="false" />
+					</div>
+				</div>
+
+				<div class="flt-form__row flt-form__row-required">
+					<div class="flt-form__subbox">
+						<label class="flt-form__label flt-form__label-required" for="phonenumber">Phone number</label>
+					</div>
+					<div class="flt-form__mainbox">
+						<input type="tel" name="phonenumber" id="phonenumber" class="flt-form__input flt-form__tel-input flt-form__input-m" required autocomplete="off" autocorrect="off" spellcheck="false" />
 						<p class="flt-form__description" data-error-placement="before">Put your description here</p>
 					</div>
 				</div>
@@ -80,34 +96,41 @@
 
 				<div class="flt-form__row flt-form__row-required">
 					<div class="flt-form__subbox">
-						<label class="flt-form__label" for="street">Street name and number</label>
+						<label class="flt-form__label flt-form__label-required" for="street">Street name and number</label>
 					</div>
 					<div class="flt-form__mainbox" data-error-placement="append">
-						<input type="text" name="street" id="street" class="flt-form__input flt-form__text-input flt-form__input-m" required />
+						<input type="text" name="street" id="street" class="flt-form__input flt-form__text-input flt-form__input-l" required autocomplete="off" autocorrect="off" spellcheck="false" />
 					</div>
 				</div>
 
 				<div class="flt-form__row flt-form__row-required">
 					<div class="flt-form__subbox">
-						<label class="flt-form__label" for="zipcode">Postal code</label>
+						<label class="flt-form__label flt-form__label-required" for="zipcode">Postal code</label>
 					</div>
 					<div class="flt-form__mainbox" data-error-placement="append">
-						<input type="text" name="zipcode" id="zipcode" class="flt-form__input flt-form__input-xs flt-form__text-input" required />
+						<input type="text" name="zipcode" id="zipcode" class="flt-form__input flt-form__input-s flt-form__text-input" required autocomplete="off" autocorrect="off" spellcheck="false" />
+					</div>
+				</div>
+
+				<div class="flt-form__row">
+					<div class="flt-form__mainbox">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua.</p>
 					</div>
 				</div>
 
 				<div class="flt-form__row flt-form__row-required">
 					<div class="flt-form__subbox">
-						<label class="flt-form__label" for="city">City</label>
+						<label class="flt-form__label flt-form__label-required" for="city">City</label>
 					</div>
 					<div class="flt-form__mainbox" data-error-placement="append">
-						<input type="text" name="city" id="city" class="flt-form__input flt-form__text-input flt-form__input-m" required />
+						<input type="text" name="city" id="city" class="flt-form__input flt-form__text-input flt-form__input-l" required autocomplete="off" autocorrect="off" spellcheck="false" />
 					</div>
 				</div>
 
 				<div class="flt-form__row flt-form__row-required">
 					<div class="flt-form__subbox">
-						<label class="flt-form__label">Country</label>
+						<label class="flt-form__label flt-form__label-required">Country</label>
 					</div>
 					<div class="flt-form__mainbox" data-error-placement="append">
 						<label class="flt-form__select-label">
@@ -120,13 +143,41 @@
 
 				<div class="flt-form__row">
 					<div class="flt-form__mainbox">
-						<label class="flt-form__checkbox-label" class="flt-form__checkbox-label"><input type="checkbox" name="newsletter" id="newsletter" class="flt-form__checkbox-input"><span class="flt-form__input-indicator"></span>Subscribe to our newsletter about discounts and destinations.</label>
+						<label class="flt-form__checkbox-label"><input type="checkbox" name="newsletter" id="newsletter" class="flt-form__checkbox-input"><span class="flt-form__input-indicator"></span>Subscribe to our newsletter about discounts and destinations.</label>
 					</div>
 				</div>
 
 			</fieldset>
 
-			<input type="submit" value="Submit" class="flt-form__submit" />
+			<fieldset class="flt-form__fieldset">
+
+				<div class="flt-form__row flt-form__row-required">
+					<div class="flt-form__subbox">
+						<label class="flt-form__label flt-form__label-required" for="password">Password</label>
+					</div>
+					<div class="flt-form__mainbox">
+						<input type="password" name="password" id="password" class="flt-form__input flt-form__input-l flt-form__password-input" data-error-placement="after" required autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="off" />
+						<label class="flt-form__checkbox-label"><input type="checkbox" name="toggle-password" id="toggle-password" class="flt-form__checkbox-input"><span class="flt-form__input-indicator"></span>Hide password</label>
+					</div>
+				</div>
+
+			</fieldset>
+
+			<fieldset class="flt-form__fieldset">
+
+				<div class="flt-form__row">
+					<div class="flt-form__mainbox">
+						<label class="flt-form__checkbox-label"><input type="checkbox" name="newsletter" id="newsletter" class="flt-form__checkbox-input"><span class="flt-form__input-indicator"></span>I agree to the terms & conditions</label>
+					</div>
+				</div>
+
+				<div class="flt-form__row">
+					<div class="flt-form__mainbox">
+						<input type="submit" value="Submit" class="flt-form__submit" />
+					</div>
+				</div>
+
+			</fieldset>
 
 		</form>
 

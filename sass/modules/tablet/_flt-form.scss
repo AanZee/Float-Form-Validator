@@ -1,3 +1,15 @@
+.flt-form__intro {
+	padding: 80px 0;
+	> * {
+		max-width: 520px;
+		margin: 0 auto;
+	}
+}
+
+.flt-form__subtitle {
+	padding-left: 200px;
+}
+
 .flt-form {
 	width: 720px;
 	margin: 0 auto;
@@ -5,7 +17,6 @@
 
 .flt-form__row {
 	@include clearfix;
-	padding: 6px 0;
 }
 
 .flt-form__subbox {
@@ -18,6 +29,7 @@
 .flt-form__mainbox {
 	float: right;
 	width: 520px;
+	padding-right: 120px;
 }
 
 .flt-form__label,
@@ -29,7 +41,8 @@
 
 .flt-form__input {
 	width: 400px;
-	&.flt-form__input-xs { width: 100px; }
-	&.flt-form__input-s {  width: 200px; }
-	&.flt-form__input-m {  width: 300px; }
+	&.flt-form__input-xs { max-width: 60px; }
+	&.flt-form__input-s {  max-width: 100px; }
+	&.flt-form__input-m {  max-width: 200px; }
+	&.flt-form__input-l { max-width: 300px; }
 }

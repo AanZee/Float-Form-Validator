@@ -1,18 +1,61 @@
+.flt-form__intro {
+	border-bottom: 4px solid $base2;
+}
+
+.flt-form__title {
+	font-size: 48px;
+	line-height: 54px;
+	font-weight: bold;
+	color: $blue;
+}
+
+.flt-form__subtitle {
+	font-size: 24px;
+	font-weight: bold;
+	color: $blue;
+	margin-bottom: 9px;
+	margin-top: 27px;
+}
+
 .flt-form {
 	font-size: 16px;
+	padding-bottom: 40px;
 	label[for] {
 		cursor: pointer;
 	}
 }
 
 .flt-form__fieldset {
-	margin: 40px 0;
+	padding: 30px 0;
+	border-bottom: 2px solid $base2;
+	> *:first-child {
+		padding-top: 0;
+		margin-top: 0;
+	}
+	> *:last-child {
+		padding-bottom: 0;
+		margin-bottom: 0;
+	}
+	&:last-child {
+		border-bottom: none;
+	}
+}
+
+.flt-form__row {
+	padding: 6px 0;
 }
 
 .flt-form__label {
 	font-weight: bold;
 	line-height: 24px;
 	display: block;
+}
+
+.flt-form__label-required {
+	&:after {
+		content: '*';
+		color: $red;
+	}
 }
 
 .flt-form__mainbox-inline-group {
@@ -23,14 +66,15 @@
 	@include appearance(none);
 	@include border-box;
 	border-radius: $border-radius;
-	padding: 12px 15px;
-	height: 48px;
+	padding: 10px 15px;
+	height: 44px;
 	font-size: 16px;
 	line-height: 24px;
 	background-color: $white;
-	box-shadow: 0 0 0 1px $base1;
+	box-shadow: 0 0 0 1px #aaa, inset 0 1px 2px rgba(0,0,0,.15);
+	font-family: inherit;
 	&:focus {
-		box-shadow: 0 0 0 2px $blue;
+		box-shadow: 0 0 0 2px $blue, inset 0 1px 2px rgba(0,0,0,.15);
 	}
 }
 
@@ -41,7 +85,7 @@
 	display: inline-block;
 	margin-right: 10px;
 	line-height: 24px;
-	padding-left: 22px;
+	padding-left: 24px;
 	.flt-form__input-indicator {
 		@include disable-user-select;
 		display: block;
@@ -98,7 +142,6 @@
 	position: absolute;
 	opacity: 0;
 	z-index: -1;
-	margin-right: 5px;
 }
 
 .flt-form__select-label {
@@ -110,9 +153,9 @@
   display: inline-block;
   margin: 0;
   padding: 10px 15px;
-  height: 48px;
+  height: 44px;
   font-size: 16px;
-  line-height: 28px;
+  line-height: 24px;
   background-color: $white;
   border: 0;
   border-radius: $border-radius;
@@ -121,6 +164,11 @@
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+  box-shadow: 0 0 0 1px #aaa;
+	font-family: inherit;
+	&:focus {
+		box-shadow: 0 0 0 2px $blue;
+	}
 }
 
 /* Undo the Firefox inner focus ring */
@@ -178,21 +226,63 @@
     content: "";
     display: block;
     width: 24px;
-    background-color: #eee;
+    background-color: $base0;
   }
   .flt-form__select-input:hover,
   .flt-form__select-input:focus,
   .flt-form__select-input:active {
-    color: #555;
-    background-color: #eee;
+    color: $base1;
+    background-color: $base0;
   }
 }
 
-.flt-form__error-message {
-	background-color: lighten($red, 30%);
+.flt-form__label-error {
 	color: $red;
-	margin: 5px 0;
-	padding: 5px 10px;
+}
+
+.flt-form__input-error {
+	box-shadow: 0 0 0 2px $red;
+	&:focus {
+		box-shadow: 0 0 0 2px $red;
+	}
+}
+
+.flt-form__error-box {
+	@include clearfix;
+	margin: 4px 0;
+}
+
+.flt-form__error-message {
+	@include arrow-on-top-line(9px, $white, lighten($red, 35%), 19px);
+	background-color: lighten($red, 35%);
+	color: $red;
+	padding: 3px 15px;
 	max-width: 400px;
 	border-radius: $border-radius;
+	font-size: 14px;
+	float: left;
+}
+
+.flt-form__description {
+	font-size: 14px;
+}
+
+.flt-form__submit {
+	padding: 10px 40px;
+	font-size: 18px;
+	border-radius: $border-radius;
+	background-color: $blue;
+	color: $white;
+	cursor: pointer;
+	border-bottom: 2px solid darken($blue, 20%);
+	&:hover,
+	&:focus {
+		background-color: lighten($blue, 5%);
+	}
+	&:active {
+		position: relative;
+		top: 1px;
+		border-bottom: none;
+		margin-bottom: 2px;
+	}
 }

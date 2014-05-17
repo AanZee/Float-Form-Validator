@@ -253,14 +253,19 @@
 }
 
 .flt-form__error-message {
-	@include arrow-on-top-line(9px, $white, lighten($red, 35%), 19px);
 	background-color: lighten($red, 35%);
-	color: $red;
+	color: darken($red, 25%);
 	padding: 3px 15px;
 	max-width: 400px;
 	border-radius: $border-radius;
 	font-size: 14px;
 	float: left;
+}
+
+.flt-form__mainbox {
+	.flt-form__error-message {
+		@include arrow-on-top-line(9px, $white, lighten($red, 35%), 19px);
+	}
 }
 
 .flt-form__description {

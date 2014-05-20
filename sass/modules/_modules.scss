@@ -1,21 +1,21 @@
 html {
-    position: relative;
-    min-height: 100%;
+	position: relative;
+	min-height: 100%;
 }
 
 
 body {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-size: 18px;
-	line-height: 27px;
-	color: $base02;
+	font-family: $flt-form__setting-font-family;
+	font-size: $flt-form__setting-font-size;
+	line-height: $flt-form__setting-line-height;
+	color: $flt-form__color-default-text;
 	word-wrap: break-word;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: none;
-	min-width: 320px;
+	min-width: $flt-form__media-query-small;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
-	background: $base1;
+	background: $flt-form__color-base1;;
 }
 
 
@@ -24,12 +24,13 @@ body {
 	position: relative;
 	height: inherit;
 	min-height: inherit;
-	background-color: $base3;
+	background-color: $flt-form__color-base3;
 }
 
+
 a {
-	color: $blue;
+	color: $flt-form__color-blue;
 	text-decoration: none;
 	padding-bottom: 3px;
-	border-bottom: 1px solid $blue;
+	border-bottom: 1px solid $flt-form__color-blue;
 }

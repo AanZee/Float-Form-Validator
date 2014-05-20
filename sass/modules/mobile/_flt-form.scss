@@ -2,24 +2,35 @@
 	padding: 40px 20px;
 }
 
+
 .flt-form__fieldset {
 	padding-left: 20px;
 	padding-right: 20px;
 }
 
+
 .flt-form__label {
 	margin-bottom: 3px;
 }
+
 
 .flt-form__mainbox {
 	max-width: 400px;
 }
 
+
+.flt-form__label-radio,
+.flt-form__label-checkbox {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+
 .flt-form__input {
 	width: 100%;
 	max-width: 400px;
-	&.flt-form__input-xs { max-width: 60px; }
-	&.flt-form__input-s {  max-width: 100px; }
-	&.flt-form__input-m {  max-width: 200px; }
-	&.flt-form__input-l { max-width: 300px; }
+	&.flt-form__input-width-xs { max-width: 60px; }
+	&.flt-form__input-width-s {  max-width: 100px; }
+	&.flt-form__input-width-m {  max-width: 200px; }
+	&.flt-form__input-width-l { max-width: 300px; }
 }

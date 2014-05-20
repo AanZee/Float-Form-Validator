@@ -1,22 +1,3 @@
-.flt-form__intro {
-	border-bottom: 4px solid $base2;
-}
-
-.flt-form__title {
-	font-size: 48px;
-	line-height: 54px;
-	font-weight: bold;
-	color: $blue;
-}
-
-.flt-form__subtitle {
-	font-size: 24px;
-	font-weight: bold;
-	color: $blue;
-	margin-bottom: 9px;
-	margin-top: 27px;
-}
-
 .flt-form {
 	font-size: 16px;
 	padding-bottom: 40px;
@@ -25,9 +6,23 @@
 	}
 }
 
+
+.flt-form__intro {
+	border-bottom: 4px solid $flt-form__color-base2;
+}
+
+
+.flt-form__title {
+	font-size: 48px;
+	line-height: 54px;
+	font-weight: bold;
+	color: $flt-form__color-blue;
+}
+
+
 .flt-form__fieldset {
 	padding: 30px 0;
-	border-bottom: 2px solid $base2;
+	border-bottom: 2px solid $flt-form__color-base2;
 	> *:first-child {
 		padding-top: 0;
 		margin-top: 0;
@@ -41,9 +36,154 @@
 	}
 }
 
-.flt-form__row {
-	padding: 6px 0;
+
+.flt-form__subtitle {
+	font-size: 24px;
+	font-weight: bold;
+	color: $flt-form__color-blue;
+	margin-bottom: 9px;
+	margin-top: $flt-form__setting-line-height;
 }
+
+
+.flt-form__row {
+	padding: 7px 0;
+	> .flt-form__error-box .flt-form__error-message {
+		@include arrow-on-bottom-line(8px, #aaa, $flt-form__color-white, 15px);
+	}
+}
+
+
+.flt-form__mainbox {
+	@include clearfix;
+	.flt-form__error-message {
+		@include arrow-on-top-line(8px, #aaa, $flt-form__color-white, 15px);
+	}
+}
+
+
+.flt-form__mainbox-inline-group {
+	@include clearfix;
+}
+
+
+//////////////////////////////////////////////////////////////
+/////////////////////////// INPUTS ///////////////////////////
+//////////////////////////////////////////////////////////////
+
+
+.flt-form__input {
+	@include appearance(none);
+	@include border-box;
+	border-radius: $flt-form__setting-border-radius;
+	padding: 10px 15px;
+	height: 44px;
+	font-size: 16px;
+	line-height: 24px;
+	background-color: $flt-form__color-white;
+	box-shadow: 0 0 0 1px #aaa, inset 0 1px 2px rgba(0,0,0,.15);
+	font-family: inherit;
+	&:focus {
+		box-shadow: 0 0 0 2px $flt-form__color-blue, inset 0 1px 2px rgba(0,0,0,.15);
+	}
+}
+
+.flt-form__input-radio:focus ~ .flt-form__input-indicator,
+.flt-form__input-checkbox:focus ~ .flt-form__input-indicator {
+	box-shadow: 0 0 0 2px $flt-form__color-blue;
+}
+
+.flt-form__input-radio:checked ~ .flt-form__input-indicator:before {
+	background-color: $flt-form__color-base02;
+}
+
+.flt-form__input-checkbox:checked ~ .flt-form__input-indicator {
+	color: $flt-form__color-default-text;
+}
+
+.flt-form__input-radio,
+.flt-form__input-checkbox {
+	position: absolute;
+	opacity: 0;
+	z-index: -1;
+}
+
+.flt-form__input-select {
+	@include appearance(none);
+	display: inline-block;
+	margin: 0;
+	padding: 10px 15px;
+	height: 44px;
+	font-size: 16px;
+	line-height: 24px;
+	background-color: $flt-form__color-white;
+	border: 0;
+	border-radius: $flt-form__setting-border-radius;
+	cursor: pointer;
+	outline: 0;
+	box-shadow: 0 0 0 1px #aaa;
+	font-family: inherit;
+	&:focus {
+		box-shadow: 0 0 0 2px $flt-form__color-blue;
+	}
+}
+
+/* Undo the Firefox inner focus ring */
+.flt-form__input-select:-moz-focusring {
+	color: transparent;
+	text-shadow: 0 0 0 #000;
+}
+
+/* Hide the arrow in IE10 and up */
+.flt-form__input-select::-ms-expand {
+	display: none;
+}
+
+/* Firefox hack to hide the arrow */
+@-moz-document url-prefix() {
+	.flt-form__input-select {
+		text-indent: 0.01px;
+		text-overflow: '';
+		padding-right: 20px;
+	}
+}
+
+/* IE9 hack to hide the arrow */
+@media screen and (min-width:0\0) {
+	.flt-form__input-select {
+		z-index: 1;
+		padding: 10px 15px;
+	}
+
+	.flt-form__label-select:after {
+		z-index: 5;
+	}
+
+	.flt-form__label-select:before {
+		position: absolute;
+		top: 0;
+		right: 16px;
+		bottom: 0;
+		z-index: 2;
+		content: "";
+		display: block;
+		width: 24px;
+		background-color: $flt-form__color-base0;
+	}
+	
+	.flt-form__input-select:hover,
+	.flt-form__input-select:focus,
+	.flt-form__input-select:active {
+		color: $flt-form__color-base1;
+		background-color: $flt-form__color-base0;
+	}
+}
+
+
+//////////////////////////////////////////////////////////////
+/////////////////////////// LABELS ///////////////////////////
+//////////////////////////////////////////////////////////////
+
 
 .flt-form__label {
 	font-weight: bold;
@@ -54,55 +194,52 @@
 .flt-form__label-required {
 	&:after {
 		content: '*';
-		color: $red;
+		color: $flt-form__color-red;
 	}
 }
 
-.flt-form__mainbox-inline-group {
-	@include clearfix;
-}
-
-.flt-form__input {
-	@include appearance(none);
-	@include border-box;
-	border-radius: $border-radius;
-	padding: 10px 15px;
-	height: 44px;
-	font-size: 16px;
-	line-height: 24px;
-	background-color: $white;
-	box-shadow: 0 0 0 1px #aaa, inset 0 1px 2px rgba(0,0,0,.15);
-	font-family: inherit;
-	&:focus {
-		box-shadow: 0 0 0 2px $blue, inset 0 1px 2px rgba(0,0,0,.15);
-	}
-}
-
-.flt-form__radio-label,
-.flt-form__checkbox-label {
+.flt-form__label-radio,
+.flt-form__label-checkbox {
 	position: relative;
 	cursor: pointer;
-	display: inline-block;
-	margin-right: 10px;
+	float: left;
 	line-height: 24px;
-	padding-left: 24px;
+	padding-left: 22px;
+	padding-right: 15px;
+	margin-right: 2px;
+	&.flt-form__label-radio-solid,
+	&.flt-form__label-checkbox-solid {
+		background-color: rgba(0,0,0,.07);
+		padding-left: 36px;
+		&:first-child {
+			border-top-left-radius: $flt-form__setting-border-radius;
+			border-bottom-left-radius: $flt-form__setting-border-radius;
+		}
+		&:last-child {
+			border-top-right-radius: $flt-form__setting-border-radius;
+			border-bottom-right-radius: $flt-form__setting-border-radius;
+		}
+		.flt-form__input-indicator {
+			left: 11px;
+		}
+	}
 	.flt-form__input-indicator {
 		@include disable-user-select;
 		display: block;
 		position: absolute;
-		top: 4px;
+		top: 14px;
 		left: 0;
 		width: 16px;
 		height: 16px;
 		line-height: 16px;
 		text-align: center;
-		color: $white;
-		background-color: $white;
-		box-shadow: 0 0 0 1px $base1;
+		color: $flt-form__color-white;
+		background-color: $flt-form__color-white;
+		box-shadow: 0 0 0 1px $flt-form__color-base1;
 	}
 }
 
-.flt-form__radio-label .flt-form__input-indicator {
+.flt-form__label-radio .flt-form__input-indicator {
 	border-radius: 50%;
 	font-size: 20px;
 	&:before {
@@ -111,162 +248,97 @@
 		width: 10px;
 		height: 10px;
 		border-radius: 50%;
-		background: $white;
+		background: $flt-form__color-white;
 		margin: 3px;
 	}
 }
 
-.flt-form__checkbox-label .flt-form__input-indicator {
-	border-radius: $border-radius / 2;
+.flt-form__label-checkbox .flt-form__input-indicator {
+	border-radius: $flt-form__setting-border-radius / 2;
 	font-size: 12px;
 	&:before {
 		content: '\2714';
 	}
 }
 
-.flt-form__radio-input:focus ~ .flt-form__input-indicator,
-.flt-form__checkbox-input:focus ~ .flt-form__input-indicator {
-	box-shadow: 0 0 0 2px $blue;
-}
-
-.flt-form__radio-input:checked ~ .flt-form__input-indicator:before {
-	background-color: $base02;
-}
-
-.flt-form__checkbox-input:checked ~ .flt-form__input-indicator {
-	color: $base02;
-}
-
-.flt-form__radio-input,
-.flt-form__checkbox-input {
-	position: absolute;
-	opacity: 0;
-	z-index: -1;
-}
-
-.flt-form__select-label {
+.flt-form__label-select {
   position: relative;
   display: inline-block;
 }
 
-.flt-form__select-input {
-  display: inline-block;
-  margin: 0;
-  padding: 10px 15px;
-  height: 44px;
-  font-size: 16px;
-  line-height: 24px;
-  background-color: $white;
-  border: 0;
-  border-radius: $border-radius;
-  cursor: pointer;
-  outline: 0;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  box-shadow: 0 0 0 1px #aaa;
-	font-family: inherit;
-	&:focus {
-		box-shadow: 0 0 0 2px $blue;
-	}
-}
-
-/* Undo the Firefox inner focus ring */
-.flt-form__select-input:-moz-focusring {
-  color: transparent;
-  text-shadow: 0 0 0 #000;
-}
-
 /* Dropdown arrow */
-.flt-form__select-label:after {
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  display: inline-block;
-  content: "";
-  width: 0;
-  height: 0;
-  margin-top: -3px;
-  pointer-events: none;
-  border-top: 6px solid;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-  border-left: 6px solid transparent;
+.flt-form__label-select:after {
+	position: absolute;
+	top: 50%;
+	right: 20px;
+	display: inline-block;
+	content: "";
+	width: 0;
+	height: 0;
+	margin-top: -3px;
+	pointer-events: none;
+	border-top: 6px solid;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	border-left: 6px solid transparent;
 }
 
-/* Hide the arrow in IE10 and up */
-.flt-form__select-input::-ms-expand {
-  display: none;
-}
 
-/* Firefox hack to hide the arrow */
-@-moz-document url-prefix() {
-  .flt-form__select-input {
-    text-indent: 0.01px;
-    text-overflow: '';
-    padding-right: 20px;
-  }
-}
+//////////////////////////////////////////////////////////////
+/////////////////////////// ERRORS ///////////////////////////
+//////////////////////////////////////////////////////////////
 
-/* IE9 hack to hide the arrow */
-@media screen and (min-width:0\0) {
-  .flt-form__select-input {
-    z-index: 1;
-    padding: 10px 15px;
-  }
-  .flt-form__select-label:after {
-    z-index: 5;
-  }
-  .flt-form__select-label:before {
-    position: absolute;
-    top: 0;
-    right: 16px;
-    bottom: 0;
-    z-index: 2;
-    content: "";
-    display: block;
-    width: 24px;
-    background-color: $base0;
-  }
-  .flt-form__select-input:hover,
-  .flt-form__select-input:focus,
-  .flt-form__select-input:active {
-    color: $base1;
-    background-color: $base0;
-  }
-}
 
-.flt-form__label-error {
-	color: $red;
-}
+.flt-form__fieldset-error {
 
-.flt-form__input-error {
-	box-shadow: 0 0 0 2px $red;
-	&:focus {
-		box-shadow: 0 0 0 2px $red;
+	.flt-form__label {
+		color: $flt-form__color-red;
 	}
+
+	.flt-form__label-radio,
+	.flt-form__label-checkbox {
+		background-color: rgba($flt-form__color-red, .15);
+		padding-left: 36px;
+		&:first-child {
+			border-top-left-radius: $flt-form__setting-border-radius;
+			border-bottom-left-radius: $flt-form__setting-border-radius;
+		}
+		&:last-child {
+			border-top-right-radius: $flt-form__setting-border-radius;
+			border-bottom-right-radius: $flt-form__setting-border-radius;
+		}
+		.flt-form__input-indicator {
+			left: 11px;
+		}
+	}
+
+	.flt-form__input-validate.flt-form__input {
+		box-shadow: 0 0 0 2px $flt-form__color-red, inset 0 1px 2px rgba(0,0,0,.15);
+		&:focus {
+			box-shadow: 0 0 0 2px $flt-form__color-red, inset 0 1px 2px rgba(0,0,0,.15);
+		}
+	}
+
 }
 
 .flt-form__error-box {
 	@include clearfix;
-	margin: 4px 0;
+	margin: 6px 0;
 }
 
 .flt-form__error-message {
-	background-color: lighten($red, 35%);
-	color: darken($red, 25%);
-	padding: 3px 15px;
+	background-color: $flt-form__color-white;
+	color: $flt-form__color-default-text;
+	padding: 6px 14px;
 	max-width: 400px;
-	border-radius: $border-radius;
+	border-radius: $flt-form__setting-border-radius;
 	font-size: 14px;
+	line-height: 21px;
 	float: left;
+	box-shadow: 0 0 0 1px #aaa;
 }
 
-.flt-form__mainbox {
-	.flt-form__error-message {
-		@include arrow-on-top-line(9px, $white, lighten($red, 35%), 19px);
-	}
-}
+
 
 .flt-form__description {
 	font-size: 14px;
@@ -274,15 +346,15 @@
 
 .flt-form__submit {
 	padding: 10px 40px;
-	font-size: 18px;
-	border-radius: $border-radius;
-	background-color: $blue;
-	color: $white;
+	font-size: $flt-form__setting-font-size;
+	border-radius: $flt-form__setting-border-radius;
+	background-color: $flt-form__color-blue;
+	color: $flt-form__color-white;
 	cursor: pointer;
-	border-bottom: 2px solid darken($blue, 20%);
+	border-bottom: 2px solid darken($flt-form__color-blue, 20%);
 	&:hover,
 	&:focus {
-		background-color: lighten($blue, 5%);
+		background-color: lighten($flt-form__color-blue, 5%);
 	}
 	&:active {
 		position: relative;

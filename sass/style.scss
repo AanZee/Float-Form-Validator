@@ -9,21 +9,21 @@
 
 
 // mobile view
-@media screen and (max-width: $tablet_width - 1) {
+@media screen and (max-width: $flt-form__media-query-medium - 1) {
 	@import "modules/mobile/modules";
 	@import "modules/mobile/flt-form";
 }
 
 
 // tablet view
-@media screen and (min-width: $tablet_width) and (max-width: $desktop_width - 1) {
+@media screen and (min-width: $flt-form__media-query-medium) and (max-width: $flt-form__media-query-large - 1) {
 	@import "modules/tablet/modules";
 	@import "modules/tablet/flt-form";
 }
 
 
 // desktop view
-@media screen and (min-width: $desktop_width) {
+@media screen and (min-width: $flt-form__media-query-large) {
 	@import "modules/desktop/modules";
 	@import "modules/desktop/flt-form";
 }

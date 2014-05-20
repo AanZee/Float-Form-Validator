@@ -1,29 +1,47 @@
-//Colors
-$white            : #fff;
-$black            : #000;
-
-$base03           : #002b36;
-$base02           : #073642;
-$base01           : #586e75;
-$base00           : #657b83;
-$base0            : #839496;
-$base1            : #74787C;
-$base2            : #E9DFBE;
-$base3            : #fdf6e3;
-$yellow           : #b58900;
-$orange           : #cb4b16;
-$red              : #dc322f;
-$magenta          : #d33682;
-$violet           : #6c71c4;
-$blue             : #268bd2;
-$cyan             : #2aa198;
-$green            : #859900;
+//////////////////////////////////////////////////////////////
+///////////////////// DEFAULT COLORS /////////////////////////
+//////////////////////////////////////////////////////////////
 
 
-//Device width
-$smartphone_width : 320px;
-$tablet_width     : 720px;
-$desktop_width    : 960px;
+$flt-form__color-white        : #ffffff;
+
+$flt-form__color-base02       : #073642;
+
+$flt-form__color-base0        : #839496;
+$flt-form__color-base1        : #74787c;
+$flt-form__color-base2        : #e9dfbe;
+$flt-form__color-base3        : #fdf6e3;
+
+$flt-form__color-red          : #dc322f;
+$flt-form__color-green        : #859900;
+$flt-form__color-blue         : #268bd2;
 
 
-$border-radius    : 6px;
+//////////////////////////////////////////////////////////////
+////////////////////// MEDIA QUERIES /////////////////////////
+//////////////////////////////////////////////////////////////
+
+
+$flt-form__media-query-small  : 320px;
+$flt-form__media-query-medium : 720px;
+$flt-form__media-query-large  : 960px;
+
+
+//////////////////////////////////////////////////////////////
+///////////////////// ELEMENT SETTINGS ///////////////////////
+//////////////////////////////////////////////////////////////
+
+
+$flt-form__setting-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$flt-form__setting-font-size: 18px;
+$flt-form__setting-line-height: 27px;
+
+$flt-form__setting-border-radius: 6px;
+
+
+//////////////////////////////////////////////////////////////
+////////////////////// ELEMENT COLORS ////////////////////////
+//////////////////////////////////////////////////////////////
+
+
+$flt-form__color-default-text: $flt-form__color-base02;

@@ -3,40 +3,18 @@
 //////////////////////////////////////////////////////////////
 
 
-$flt-form__color-white        : #ffffff;
+$flt-form__color-white                          : #ffffff;
 
-$flt-form__color-base02       : #073642;
+$flt-form__color-base02                         : #073642;
 
-$flt-form__color-base0        : #839496;
-$flt-form__color-base1        : #74787c;
-$flt-form__color-base2        : #e9dfbe;
-$flt-form__color-base3        : #fdf6e3;
+$flt-form__color-base0                          : #839496;
+$flt-form__color-base1                          : #74787c;
+$flt-form__color-base2                          : #e9dfbe;
+$flt-form__color-base3                          : #fdf6e3;
 
-$flt-form__color-red          : #dc322f;
-$flt-form__color-green        : #859900;
-$flt-form__color-blue         : #268bd2;
-
-
-//////////////////////////////////////////////////////////////
-////////////////////// MEDIA QUERIES /////////////////////////
-//////////////////////////////////////////////////////////////
-
-
-$flt-form__media-query-small  : 320px;
-$flt-form__media-query-medium : 720px;
-$flt-form__media-query-large  : 960px;
-
-
-//////////////////////////////////////////////////////////////
-///////////////////// ELEMENT SETTINGS ///////////////////////
-//////////////////////////////////////////////////////////////
-
-
-$flt-form__setting-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$flt-form__setting-font-size: 18px;
-$flt-form__setting-line-height: 27px;
-
-$flt-form__setting-border-radius: 6px;
+$flt-form__color-red                            : #dc322f;
+$flt-form__color-green                          : #859900;
+$flt-form__color-blue                           : #268bd2;
 
 
 //////////////////////////////////////////////////////////////
@@ -44,4 +22,179 @@ $flt-form__setting-border-radius: 6px;
 //////////////////////////////////////////////////////////////
 
 
-$flt-form__color-default-text: $flt-form__color-base02;
+$flt-form__color-text                           : $flt-form__color-base02;
+$flt-form__color-text-title                     : $flt-form__color-blue;
+$flt-form__color-text-subtitle                  : $flt-form__color-blue;
+
+$flt-form__color-webkit-tab-highlight           : rgba(0,0,0,0);
+$flt-form__color-links                          : $flt-form__color-blue;
+
+$flt-form__color-background                     : $flt-form__color-base1;
+$flt-form__color-background-inner               : $flt-form__color-base3;
+$flt-form__color-background-error-message       : $flt-form__color-white;
+
+$flt-form__color-border-error-message           : #aaa;
+$flt-form__color-error                          : $flt-form__color-red;
+
+
+//////////////////////////////////////////////////////////////
+////////////////////// MEDIA QUERIES /////////////////////////
+//////////////////////////////////////////////////////////////
+
+
+$flt-form__media-query-small                    : 320px;
+$flt-form__media-query-medium                   : 720px;
+$flt-form__media-query-large                    : 960px;
+
+
+//////////////////////////////////////////////////////////////
+///////////////////// ELEMENT SETTINGS ///////////////////////
+//////////////////////////////////////////////////////////////
+
+
+$flt-form__setting-font-family                  : "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+// Font sizes
+$flt-form__setting-font-size                    : 18px;
+$flt-form__setting-font-size-form               : 16px;
+$flt-form__setting-font-size-title              : 48px;
+$flt-form__setting-font-size-subtitle           : 24px;
+$flt-form__setting-font-size-input              : 16px;
+$flt-form__setting-font-size-error              : 14px;
+$flt-form__setting-font-size-description        : 14px;
+$flt-form__setting-font-size-submit             : 18px;
+
+
+// Line heights
+$flt-form__setting-line-height                  : 27px;
+$flt-form__setting-line-height-title            : 54px;
+$flt-form__setting-line-height-error            : 21px;
+
+
+// Font weights
+$flt-form__setting-font-weight-title            : bold;
+$flt-form__setting-font-weight-subtitle         : bold;
+$flt-form__setting-font-weight-label            : bold;
+
+
+// Widths
+$flt-form__setting-width-inner-medium           : 720px;
+$flt-form__setting-width-inner-large            : 920px;
+
+$flt-form__setting-with-form-medium             : 720px;
+$flt-form__setting-with-form-large              : 720px;
+
+$flt-form__setting-width-subbox-medium          : 200px;
+$flt-form__setting-width-subbox-large           : 200px;
+
+$flt-form__setting-max-width-mainbox-small      : 400px;
+$flt-form__setting-max-width-mainbox-medium     : 520px;
+$flt-form__setting-max-width-mainbox-large      : 520px;
+
+$flt-form__setting-max-width-input              : 400px;
+$flt-form__setting-max-width-input-xs           : 60px;
+$flt-form__setting-max-width-input-s            : 100px;
+$flt-form__setting-max-width-input-m            : 200px;
+$flt-form__setting-max-width-input-l            : 300px;
+
+
+// Spacing (padding)
+$flt-form__setting-padding-fieldset-small       : 30px 20px;
+$flt-form__setting-padding-fieldset-medium      : 30px 0;
+$flt-form__setting-padding-fieldset-large       : 30px 0;
+
+$flt-form__setting-padding-row                  : 7px 0;
+
+$flt-form__setting-padding-right-subbox-medium  : 10px;
+$flt-form__setting-padding-right-subbox-large   : 10px;
+
+$flt-form__setting-padding-top-label-small      : 10px;
+$flt-form__setting-padding-bottom-label-small   : 10px;
+$flt-form__setting-padding-top-label-medium     : 10px;
+$flt-form__setting-padding-bottom-label-medium  : 10px;
+$flt-form__setting-padding-top-label-large      : 10px;
+$flt-form__setting-padding-bottom-label-large   : 10px;
+
+$flt-form__setting-padding-bottom-link          : 3px;
+$flt-form__setting-padding-bottom-form          : 40px;
+
+$flt-form__setting-padding-intro-small          : 40px 20px;
+$flt-form__setting-padding-intro-medium         : 80px 100px;
+$flt-form__setting-padding-intro-large          : 80px 100px;
+
+
+// Spacing (margin)
+$flt-form__setting-margin-top-subtitle          : 27px;
+$flt-form__setting-margin-bottom-subtitle       : 9px;
+
+$flt-form__setting-margin-bottom-label          : 3px;
+
+$flt-form__setting-margin-top-inner-large       : 40px;
+$flt-form__setting-margin-bottom-inner-large    : 40px;
+$flt-form__setting-margin-top-inner-medium      : 	20px;
+$flt-form__setting-margin-bottom-inner-medium   : 20px;
+
+
+// Borders
+$flt-form__setting-border-bottom-link           : 1px solid $flt-form__color-blue;
+$flt-form__setting-border-bottom-intro          : 4px solid $flt-form__color-base2;
+$flt-form__setting-border-bottom-fieldset       : 2px solid $flt-form__color-base2;
+
+
+// Input element
+$flt-form__setting-input-height                 : 44px; // Total height including padding and line height
+$flt-form__setting-input-padding                : 10px 15px;
+$flt-form__setting-input-line-height            : 24px;
+$flt-form__setting-input-background-color       : $flt-form__color-white;
+
+$flt-form__setting-input-box-shadow             : 0 0 0 1px #aaa, inset 0 1px 2px rgba(0,0,0,.15); // fake border
+$flt-form__setting-input-box-shadow-focus       : 0 0 0 2px $flt-form__color-blue, inset 0 1px 2px rgba(0,0,0,.15);
+
+$flt-form__setting-input-box-shadow-error       : 0 0 0 1px $flt-form__color-red, inset 0 1px 2px rgba(0,0,0,.15);
+$flt-form__setting-input-box-shadow-error-focus : 0 0 0 2px $flt-form__color-red, inset 0 1px 2px rgba(0,0,0,.15);
+
+
+// Checkboxes and radios (car)
+$flt-form__setting-car-box-shadow-focus         : 0 0 0 2px $flt-form__color-blue;
+$flt-form__setting-car-checked-color            : $flt-form__color-base02;
+$flt-form__setting-car-margin-right             : 2px;
+
+$flt-form__setting-car-padding-left             : 22px;
+$flt-form__setting-car-padding-right            : 15px;
+
+$flt-form__setting-car-indicator-top            : 14px;
+$flt-form__setting-car-indicator-left           : 0;
+$flt-form__setting-car-indicator-background     : $flt-form__color-white;
+$flt-form__setting-car-indicator-box-shadow     : 0 0 0 1px $flt-form__color-base1; // fake border
+
+$flt-form__setting-car-solid-background         : rgba(0,0,0,.07);
+$flt-form__setting-car-solid-padding-left       : 36px;
+$flt-form__setting-car-solid-inidcator-left     : 11px;
+
+$flt-form__setting-car-error-background         : rgba($flt-form__color-red, .15);
+
+
+// Select 
+$flt-form__setting-select-box-shadow            : 0 0 0 1px #aaa;
+$flt-form__setting-select-box-shadow-focus      : 0 0 0 2px $flt-form__color-blue;
+
+
+// Border radius
+$flt-form__setting-border-radius                : 6px;
+$flt-form__setting-border-radius-checkbox       : 3px;
+
+
+// Errors
+$flt-form__setting-error-box-margin             : 6px 0;
+
+$flt-form__setting-error-message-padding        : 6px 14px;
+$flt-form__setting-error-message-max-width      : 400px;
+
+
+// Submit button
+$flt-form__setting-submit-padding               : 10px 40px;
+$flt-form__setting-submit-background            : $flt-form__color-blue;
+$flt-form__setting-submit-background-hover      : lighten($flt-form__color-blue, 5%);
+$flt-form__setting-submit-color                 : $flt-form__color-white;
+$flt-form__setting-submit-border-bottom         : 2px solid darken($flt-form__color-blue, 20%);

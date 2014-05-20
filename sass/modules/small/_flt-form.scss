@@ -1,0 +1,34 @@
+.flt-form__intro {
+	padding                                : $flt-form__setting-padding-intro-small ;
+}
+
+
+.flt-form__fieldset {
+	padding                                : $flt-form__setting-padding-fieldset-small;
+}
+
+.flt-form__label {
+	margin-bottom                          : $flt-form__setting-margin-bottom-label;
+}
+
+
+.flt-form__mainbox {
+	max-width                              : $flt-form__setting-max-width-mainbox-small;
+}
+
+
+.flt-form__label-radio,
+.flt-form__label-checkbox {
+	padding-top                            : $flt-form__setting-padding-top-label-small;
+	padding-bottom                         : $flt-form__setting-padding-bottom-label-small;
+}
+
+
+.flt-form__input {
+	width                                  : 100%;
+	max-width                              : $flt-form__setting-max-width-input;
+	&.flt-form__input-width-xs { max-width : $flt-form__setting-max-width-input-xs; }
+	&.flt-form__input-width-s {  max-width : $flt-form__setting-max-width-input-s; }
+	&.flt-form__input-width-m {  max-width : $flt-form__setting-max-width-input-m; }
+	&.flt-form__input-width-l {  max-width : $flt-form__setting-max-width-input-l; }
+}

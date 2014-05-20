@@ -8,22 +8,22 @@
 @import "modules/flt-form";
 
 
-// mobile view
+// small view
 @media screen and (max-width: $flt-form__media-query-medium - 1) {
-	@import "modules/mobile/modules";
-	@import "modules/mobile/flt-form";
+	@import "modules/small/modules";
+	@import "modules/small/flt-form";
 }
 
 
-// tablet view
+// medium view
 @media screen and (min-width: $flt-form__media-query-medium) and (max-width: $flt-form__media-query-large - 1) {
-	@import "modules/tablet/modules";
-	@import "modules/tablet/flt-form";
+	@import "modules/medium/modules";
+	@import "modules/medium/flt-form";
 }
 
 
-// desktop view
+// large view
 @media screen and (min-width: $flt-form__media-query-large) {
-	@import "modules/desktop/modules";
-	@import "modules/desktop/flt-form";
+	@import "modules/large/modules";
+	@import "modules/large/flt-form";
 }

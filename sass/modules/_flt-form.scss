@@ -1,6 +1,6 @@
 .flt-form {
-	font-size: 16px;
-	padding-bottom: 40px;
+	font-size      : $flt-form__setting-font-size-form;
+	padding-bottom : $flt-form__setting-padding-bottom-form;
 	label[for] {
 		cursor: pointer;
 	}
@@ -8,21 +8,20 @@
 
 
 .flt-form__intro {
-	border-bottom: 4px solid $flt-form__color-base2;
+	border-bottom: $flt-form__setting-border-bottom-intro;
 }
 
 
 .flt-form__title {
-	font-size: 48px;
-	line-height: 54px;
-	font-weight: bold;
-	color: $flt-form__color-blue;
+	font-size   : $flt-form__setting-font-size-title;
+	line-height : $flt-form__setting-line-height-title;
+	font-weight : $flt-form__setting-font-weight-title;
+	color       : $flt-form__color-text-title;
 }
 
 
 .flt-form__fieldset {
-	padding: 30px 0;
-	border-bottom: 2px solid $flt-form__color-base2;
+	border-bottom : $flt-form__setting-border-bottom-fieldset;
 	> *:first-child {
 		padding-top: 0;
 		margin-top: 0;
@@ -38,18 +37,18 @@
 
 
 .flt-form__subtitle {
-	font-size: 24px;
-	font-weight: bold;
-	color: $flt-form__color-blue;
-	margin-bottom: 9px;
-	margin-top: $flt-form__setting-line-height;
+	font-size     : $flt-form__setting-font-size-subtitle;
+	font-weight   : $flt-form__setting-font-weight-subtitle;
+	color         : $flt-form__color-text-subtitle;
+	margin-top    : $flt-form__setting-margin-top-subtitle;
+	margin-bottom : $flt-form__setting-margin-bottom-subtitle;
 }
 
 
 .flt-form__row {
-	padding: 7px 0;
+	padding: $flt-form__setting-padding-row;
 	> .flt-form__error-box .flt-form__error-message {
-		@include arrow-on-bottom-line(8px, #aaa, $flt-form__color-white, 15px);
+		@include arrow-on-bottom-line(8px, $flt-form__color-border-error-message, $flt-form__color-background-error-message, 15px);
 	}
 }
 
@@ -57,7 +56,7 @@
 .flt-form__mainbox {
 	@include clearfix;
 	.flt-form__error-message {
-		@include arrow-on-top-line(8px, #aaa, $flt-form__color-white, 15px);
+		@include arrow-on-top-line(8px, $flt-form__color-border-error-message, $flt-form__color-background-error-message, 15px);
 	}
 }
 
@@ -75,30 +74,31 @@
 .flt-form__input {
 	@include appearance(none);
 	@include border-box;
-	border-radius: $flt-form__setting-border-radius;
-	padding: 10px 15px;
-	height: 44px;
-	font-size: 16px;
-	line-height: 24px;
-	background-color: $flt-form__color-white;
-	box-shadow: 0 0 0 1px #aaa, inset 0 1px 2px rgba(0,0,0,.15);
-	font-family: inherit;
+	font-family      : inherit;
+	color            : inherit;
+	border-radius    : $flt-form__setting-border-radius;
+	padding          : $flt-form__setting-input-padding;
+	height           : $flt-form__setting-input-height;
+	font-size        : $flt-form__setting-font-size-input;
+	line-height      : $flt-form__setting-input-line-height;
+	background-color : $flt-form__setting-input-background-color;
+	box-shadow       : $flt-form__setting-input-box-shadow;
 	&:focus {
-		box-shadow: 0 0 0 2px $flt-form__color-blue, inset 0 1px 2px rgba(0,0,0,.15);
+		box-shadow: $flt-form__setting-input-box-shadow-focus;
 	}
 }
 
 .flt-form__input-radio:focus ~ .flt-form__input-indicator,
 .flt-form__input-checkbox:focus ~ .flt-form__input-indicator {
-	box-shadow: 0 0 0 2px $flt-form__color-blue;
+	box-shadow: $flt-form__setting-car-box-shadow-focus;
 }
 
 .flt-form__input-radio:checked ~ .flt-form__input-indicator:before {
-	background-color: $flt-form__color-base02;
+	background-color: $flt-form__setting-car-checked-color;
 }
 
 .flt-form__input-checkbox:checked ~ .flt-form__input-indicator {
-	color: $flt-form__color-default-text;
+	color: $flt-form__setting-car-checked-color;
 }
 
 .flt-form__input-radio,
@@ -110,28 +110,28 @@
 
 .flt-form__input-select {
 	@include appearance(none);
-	display: inline-block;
-	margin: 0;
-	padding: 10px 15px;
-	height: 44px;
-	font-size: 16px;
-	line-height: 24px;
-	background-color: $flt-form__color-white;
-	border: 0;
-	border-radius: $flt-form__setting-border-radius;
-	cursor: pointer;
-	outline: 0;
-	box-shadow: 0 0 0 1px #aaa;
-	font-family: inherit;
+	font-family      : inherit;
+	cursor           : pointer;
+	display          : inline-block;
+	margin           : 0;
+	border           : 0;
+	outline          : 0;
+	padding          : $flt-form__setting-input-padding;
+	height           : $flt-form__setting-input-height;
+	font-size        : $flt-form__setting-font-size-input;
+	line-height      : $flt-form__setting-input-line-height;
+	background-color : $flt-form__setting-input-background-color;
+	border-radius    : $flt-form__setting-border-radius;
+	box-shadow       : $flt-form__setting-select-box-shadow;
 	&:focus {
-		box-shadow: 0 0 0 2px $flt-form__color-blue;
+		box-shadow: $flt-form__setting-select-box-shadow-focus;
 	}
 }
 
 /* Undo the Firefox inner focus ring */
 .flt-form__input-select:-moz-focusring {
-	color: transparent;
-	text-shadow: 0 0 0 #000;
+	color       : transparent;
+	text-shadow : 0 0 0 $flt-form__color-text;
 }
 
 /* Hide the arrow in IE10 and up */
@@ -142,17 +142,17 @@
 /* Firefox hack to hide the arrow */
 @-moz-document url-prefix() {
 	.flt-form__input-select {
-		text-indent: 0.01px;
-		text-overflow: '';
-		padding-right: 20px;
+		text-indent   : 0.01px;
+		text-overflow : '';
+		padding-right : 20px;
 	}
 }
 
 /* IE9 hack to hide the arrow */
 @media screen and (min-width:0\0) {
 	.flt-form__input-select {
-		z-index: 1;
-		padding: 10px 15px;
+		z-index : 1;
+		padding : $flt-form__setting-input-padding;
 	}
 
 	.flt-form__label-select:after {
@@ -160,104 +160,22 @@
 	}
 
 	.flt-form__label-select:before {
-		position: absolute;
-		top: 0;
-		right: 16px;
-		bottom: 0;
-		z-index: 2;
-		content: "";
-		display: block;
-		width: 24px;
-		background-color: $flt-form__color-base0;
+		position         : absolute;
+		top              : 0;
+		right            : 15px;
+		bottom           : 0;
+		z-index          : 2;
+		content          : "";
+		display          : block;
+		width            : 24px;
+		background-color : $flt-form__setting-input-background-color;
 	}
 	
 	.flt-form__input-select:hover,
 	.flt-form__input-select:focus,
 	.flt-form__input-select:active {
-		color: $flt-form__color-base1;
-		background-color: $flt-form__color-base0;
-	}
-}
-
-
-//////////////////////////////////////////////////////////////
-/////////////////////////// LABELS ///////////////////////////
-//////////////////////////////////////////////////////////////
-
-
-.flt-form__label {
-	font-weight: bold;
-	line-height: 24px;
-	display: block;
-}
-
-.flt-form__label-required {
-	&:after {
-		content: '*';
-		color: $flt-form__color-red;
-	}
-}
-
-.flt-form__label-radio,
-.flt-form__label-checkbox {
-	position: relative;
-	cursor: pointer;
-	float: left;
-	line-height: 24px;
-	padding-left: 22px;
-	padding-right: 15px;
-	margin-right: 2px;
-	&.flt-form__label-radio-solid,
-	&.flt-form__label-checkbox-solid {
-		background-color: rgba(0,0,0,.07);
-		padding-left: 36px;
-		&:first-child {
-			border-top-left-radius: $flt-form__setting-border-radius;
-			border-bottom-left-radius: $flt-form__setting-border-radius;
-		}
-		&:last-child {
-			border-top-right-radius: $flt-form__setting-border-radius;
-			border-bottom-right-radius: $flt-form__setting-border-radius;
-		}
-		.flt-form__input-indicator {
-			left: 11px;
-		}
-	}
-	.flt-form__input-indicator {
-		@include disable-user-select;
-		display: block;
-		position: absolute;
-		top: 14px;
-		left: 0;
-		width: 16px;
-		height: 16px;
-		line-height: 16px;
-		text-align: center;
-		color: $flt-form__color-white;
-		background-color: $flt-form__color-white;
-		box-shadow: 0 0 0 1px $flt-form__color-base1;
-	}
-}
-
-.flt-form__label-radio .flt-form__input-indicator {
-	border-radius: 50%;
-	font-size: 20px;
-	&:before {
-		display: block;
-		content: '';
-		width: 10px;
-		height: 10px;
-		border-radius: 50%;
-		background: $flt-form__color-white;
-		margin: 3px;
-	}
-}
-
-.flt-form__label-checkbox .flt-form__input-indicator {
-	border-radius: $flt-form__setting-border-radius / 2;
-	font-size: 12px;
-	&:before {
-		content: '\2714';
+		color            : $flt-form__color-text;
+		background-color : $flt-form__setting-input-background-color;
 	}
 }
 
@@ -268,37 +186,54 @@
 
 /* Dropdown arrow */
 .flt-form__label-select:after {
-	position: absolute;
-	top: 50%;
-	right: 20px;
-	display: inline-block;
-	content: "";
-	width: 0;
-	height: 0;
-	margin-top: -3px;
-	pointer-events: none;
-	border-top: 6px solid;
-	border-right: 6px solid transparent;
-	border-bottom: 6px solid transparent;
-	border-left: 6px solid transparent;
+	position       : absolute;
+	top            : 50%;
+	right          : 20px;
+	display        : inline-block;
+	content        : "";
+	width          : 0;
+	height         : 0;
+	margin-top     : -3px;
+	pointer-events : none;
+	border-right   : 6px solid transparent;
+	border-bottom  : 6px solid transparent;
+	border-left    : 6px solid transparent;
+	border-top     : 6px solid $flt-form__color-text;
 }
 
 
+
 //////////////////////////////////////////////////////////////
-/////////////////////////// ERRORS ///////////////////////////
+/////////////////////////// LABELS ///////////////////////////
 //////////////////////////////////////////////////////////////
 
 
-.flt-form__fieldset-error {
+.flt-form__label {
+	display: block;
+	font-weight: $flt-form__setting-font-weight-label;
+	line-height: $flt-form__setting-input-line-height;
+}
 
-	.flt-form__label {
-		color: $flt-form__color-red;
+.flt-form__label-required {
+	&:after {
+		content: '*';
+		color: $flt-form__color-error;
 	}
+}
 
-	.flt-form__label-radio,
-	.flt-form__label-checkbox {
-		background-color: rgba($flt-form__color-red, .15);
-		padding-left: 36px;
+.flt-form__label-radio,
+.flt-form__label-checkbox {
+	position      : relative;
+	cursor        : pointer;
+	float         : left;
+	line-height   : $flt-form__setting-input-line-height;
+	padding-left  : $flt-form__setting-car-padding-left;
+	padding-right : $flt-form__setting-car-padding-right;
+	margin-right  : $flt-form__setting-car-margin-right;
+	&.flt-form__label-radio-solid,
+	&.flt-form__label-checkbox-solid {
+		background-color : $flt-form__setting-car-solid-background;
+		padding-left     : $flt-form__setting-car-solid-padding-left;
 		&:first-child {
 			border-top-left-radius: $flt-form__setting-border-radius;
 			border-bottom-left-radius: $flt-form__setting-border-radius;
@@ -308,14 +243,79 @@
 			border-bottom-right-radius: $flt-form__setting-border-radius;
 		}
 		.flt-form__input-indicator {
-			left: 11px;
+			left: $flt-form__setting-car-solid-inidcator-left;
+		}
+	}
+	.flt-form__input-indicator {
+		@include disable-user-select;
+		display          : block;
+		position         : absolute;
+		width            : 16px;
+		height           : 16px;
+		line-height      : 16px;
+		text-align       : center;
+		top              : $flt-form__setting-car-indicator-top;
+		left             : $flt-form__setting-car-indicator-left;
+		color            : $flt-form__setting-car-indicator-background;
+		background-color : $flt-form__setting-car-indicator-background;
+		box-shadow       : $flt-form__setting-car-indicator-box-shadow;
+	}
+}
+
+.flt-form__label-radio .flt-form__input-indicator {
+	border-radius: 50%;
+	font-size: 20px;
+	&:before {
+		display       : block;
+		content       : '';
+		width         : 10px;
+		height        : 10px;
+		border-radius : 50%;
+		margin        : 3px;
+		background    : $flt-form__setting-car-indicator-background;
+	}
+}
+
+.flt-form__label-checkbox .flt-form__input-indicator {
+	border-radius: $flt-form__setting-border-radius-checkbox;
+	font-size: 12px;
+	&:before {
+		content: '\2714';
+	}
+}
+
+//////////////////////////////////////////////////////////////
+/////////////////////////// ERRORS ///////////////////////////
+//////////////////////////////////////////////////////////////
+
+
+.flt-form__fieldset-error {
+
+	.flt-form__label {
+		color: $flt-form__color-error;
+	}
+
+	.flt-form__label-radio,
+	.flt-form__label-checkbox {
+		background-color: $flt-form__setting-car-error-background;
+		padding-left: $flt-form__setting-car-solid-padding-left;
+		&:first-child {
+			border-top-left-radius: $flt-form__setting-border-radius;
+			border-bottom-left-radius: $flt-form__setting-border-radius;
+		}
+		&:last-child {
+			border-top-right-radius: $flt-form__setting-border-radius;
+			border-bottom-right-radius: $flt-form__setting-border-radius;
+		}
+		.flt-form__input-indicator {
+			left: $flt-form__setting-car-solid-inidcator-left;
 		}
 	}
 
 	.flt-form__input-validate.flt-form__input {
-		box-shadow: 0 0 0 2px $flt-form__color-red, inset 0 1px 2px rgba(0,0,0,.15);
+		box-shadow: $flt-form__setting-input-box-shadow-error;
 		&:focus {
-			box-shadow: 0 0 0 2px $flt-form__color-red, inset 0 1px 2px rgba(0,0,0,.15);
+			box-shadow: $flt-form__setting-input-box-shadow-error-focus;
 		}
 	}
 
@@ -323,38 +323,38 @@
 
 .flt-form__error-box {
 	@include clearfix;
-	margin: 6px 0;
+	margin: $flt-form__setting-error-box-margin;
 }
 
 .flt-form__error-message {
-	background-color: $flt-form__color-white;
-	color: $flt-form__color-default-text;
-	padding: 6px 14px;
-	max-width: 400px;
-	border-radius: $flt-form__setting-border-radius;
-	font-size: 14px;
-	line-height: 21px;
-	float: left;
-	box-shadow: 0 0 0 1px #aaa;
+	float            : left;
+	background-color : $flt-form__color-background-error-message;
+	color            : $flt-form__color-text;
+	padding          : $flt-form__setting-error-message-padding;
+	max-width        : $flt-form__setting-error-message-max-width;
+	border-radius    : $flt-form__setting-border-radius;
+	font-size        : $flt-form__setting-font-size-error;
+	line-height      : $flt-form__setting-line-height-error;
+	box-shadow       : 0 0 0 1px $flt-form__color-border-error-message;
 }
 
 
 
 .flt-form__description {
-	font-size: 14px;
+	font-size: $flt-form__setting-font-size-description;
 }
 
 .flt-form__submit {
-	padding: 10px 40px;
-	font-size: $flt-form__setting-font-size;
-	border-radius: $flt-form__setting-border-radius;
-	background-color: $flt-form__color-blue;
-	color: $flt-form__color-white;
-	cursor: pointer;
-	border-bottom: 2px solid darken($flt-form__color-blue, 20%);
+	cursor           : pointer;
+	padding          : $flt-form__setting-submit-padding;
+	font-size        : $flt-form__setting-font-size-submit;
+	border-radius    : $flt-form__setting-border-radius;
+	background-color : $flt-form__setting-submit-background;
+	color            : $flt-form__setting-submit-color;
+	border-bottom    : $flt-form__setting-submit-border-bottom;
 	&:hover,
 	&:focus {
-		background-color: lighten($flt-form__color-blue, 5%);
+		background-color: $flt-form__setting-submit-background-hover;
 	}
 	&:active {
 		position: relative;

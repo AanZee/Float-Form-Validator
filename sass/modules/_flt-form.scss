@@ -232,8 +232,8 @@
 	margin-right  : $flt-form__setting-car-margin-right;
 	&.flt-form__label-radio-solid,
 	&.flt-form__label-checkbox-solid {
-		background-color : $flt-form__setting-car-solid-background;
-		padding-left     : $flt-form__setting-car-solid-padding-left;
+		background-color : $flt-form__setting-car-boxed-background;
+		padding-left     : $flt-form__setting-car-boxed-padding-left;
 		&:first-child {
 			border-top-left-radius: $flt-form__setting-border-radius;
 			border-bottom-left-radius: $flt-form__setting-border-radius;
@@ -243,7 +243,7 @@
 			border-bottom-right-radius: $flt-form__setting-border-radius;
 		}
 		.flt-form__input-indicator {
-			left: $flt-form__setting-car-solid-inidcator-left;
+			left: $flt-form__setting-car-boxed-inidcator-left;
 		}
 	}
 	.flt-form__input-indicator {
@@ -298,7 +298,7 @@
 	.flt-form__label-radio,
 	.flt-form__label-checkbox {
 		background-color: $flt-form__setting-car-error-background;
-		padding-left: $flt-form__setting-car-solid-padding-left;
+		padding-left: $flt-form__setting-car-boxed-padding-left;
 		&:first-child {
 			border-top-left-radius: $flt-form__setting-border-radius;
 			border-bottom-left-radius: $flt-form__setting-border-radius;
@@ -308,7 +308,7 @@
 			border-bottom-right-radius: $flt-form__setting-border-radius;
 		}
 		.flt-form__input-indicator {
-			left: $flt-form__setting-car-solid-inidcator-left;
+			left: $flt-form__setting-car-boxed-inidcator-left;
 		}
 	}
 

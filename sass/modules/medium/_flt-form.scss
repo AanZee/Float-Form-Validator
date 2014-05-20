@@ -50,6 +50,14 @@
 }
 
 
+.flt-form__label {
+	&.flt-form__label-size-xs { font-size: $flt-form__setting-font-size-label-xs }
+	&.flt-form__label-size-s  { font-size: $flt-form__setting-font-size-label-s }
+	&.flt-form__label-size-m  { font-size: $flt-form__setting-font-size-label-m }
+	&.flt-form__label-size-l  { font-size: $flt-form__setting-font-size-label-l }
+}
+
+
 .flt-form__input {
 	width: $flt-form__setting-max-width-input;
 	&.flt-form__input-width-xs { max-width: $flt-form__setting-max-width-input-xs; }

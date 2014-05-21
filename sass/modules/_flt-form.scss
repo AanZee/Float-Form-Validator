@@ -1,5 +1,6 @@
 .flt-form {
 	font-size      : $flt-form__setting-font-size-form;
+	line-height    : $flt-form__setting-line-height-form;
 	padding-bottom : $flt-form__setting-padding-bottom-form;
 	label[for] {
 		cursor: pointer;
@@ -22,9 +23,12 @@
 
 .flt-form__top-error {
 	background-color: $flt-form__color-error-background;
-	margin: 20px 0;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	h2 {
+		color         : $flt-form__color-error;
+		font-size     : $flt-form__setting-font-size-subtitle;
+		font-weight   : $flt-form__setting-font-weight-subtitle;
+		margin-bottom : $flt-form__setting-margin-bottom-subtitle;
+	}
 }
 
 

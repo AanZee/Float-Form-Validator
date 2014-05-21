@@ -366,7 +366,6 @@
 
 .flt-form__messages {
 	@include clearfix;
-	margin: $flt-form__setting-error-box-margin;
 }
 
 .flt-form__message-error {
@@ -379,6 +378,7 @@
 	font-size        : $flt-form__setting-font-size-error;
 	line-height      : $flt-form__setting-line-height-error;
 	box-shadow       : 0 0 0 1px $flt-form__color-border-error-message;
+	margin           : $flt-form__setting-error-box-margin;
 }
 
 

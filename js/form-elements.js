@@ -90,7 +90,40 @@
 			this.$input.on('change', function () {
 				_this.validate({
 					eventType: 'change',
-					placeErrorsWhenInvalid: ['length']
+					placeErrorsWhenInvalid: ['number', 'length']
+				});
+			});
+		}
+	});
+
+	/**
+	 * Radio
+	 * ------------------------------------------------------
+	 * Simple text input fields inside a form element
+	 * this.$input is the text input
+	 */
+	$.FormValidator.addFormElement('radio', {
+		getValue: function () {
+			return this.$input.filter(':checked').val();
+		},
+
+		/**
+		 * @param {any} value - returned from getValue method above
+		 */
+		validation: function (value) {
+			// Required and length
+			return [
+				{ 'required': $.FormValidator.methods.required(value) }
+			];
+		},
+
+		loadEvents: function () {
+			var _this = this;
+
+			this.$input.on('change', function () {
+				_this.validate({
+					eventType: 'change',
+					placeErrorsWhenInvalid: ['number', 'length']
 				});
 			});
 		}

@@ -56,7 +56,8 @@
 	FormValidator.messages = {
 		generic: "An error occurred",
 		required: "This field is required",
-		email: "This is not a correct email address"
+		email: "This is not a correct email address",
+		number: "This is not a correct number"
 	};
 
 	FormValidator.messageTemplates = {
@@ -92,14 +93,14 @@
 			return true;
 		},
 
-		// https://github.com/jzaefferer/jquery-validation/blob/master/src/core.js
-		// From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
-		// Retrieved 2014-01-14
-		// If you have a problem with this implementation, report a bug against the above spec
-		// Or use custom methods to implement your own email validation
 		email: function (value) {
 			return /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( value );
+		},
+
+		number: function (value) {
+			return /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test( value );
 		}
+
 	};
 
 	/**

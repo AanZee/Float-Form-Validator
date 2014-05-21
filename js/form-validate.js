@@ -366,7 +366,7 @@
 	/**
 	 *  @param {object} options - { eventType: string, placeErrorsWhenInvalid: array }
 	 */
-	FormElement.prototype.validate = function (options) {
+	FormElement.prototype.validate = function (options, callback) {
 		var _this = this;
 
 		// Get the error stack from the validation method
@@ -381,8 +381,8 @@
 
 		if ( errors.length > 0) {
 			// Change state only on validate
-
 			this.isValid = false;
+
 			// There are errors, neutralize first
 			this.setNeutralState();
 
@@ -406,6 +406,8 @@
 			// The form element is valid
 			this.setValidState();
 		}
+
+		if (callback && typeof callback === 'function') callback.apply(this);
 	};
 
 	/**

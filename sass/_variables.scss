@@ -13,7 +13,7 @@ $flt-form__color-error                          : #dc322f;
 $flt-form__color-valid                          : #859900;
 $flt-form__color-warning                        : #FFCC00;
 
-$flt-form__color-background                     : #74787c;
+$flt-form__color-background                     : #698282;
 $flt-form__color-background-inner               : #fdf6e3;
 $flt-form__color-background-error-message       : #ffffff;
 
@@ -142,6 +142,9 @@ $flt-form__setting-input-background-color       : #ffffff;
 
 $flt-form__setting-input-box-shadow             : 0 0 0 1px #aaa, inset 0 1px 2px rgba(0,0,0,.15); // fake border
 $flt-form__setting-input-box-shadow-focus       : 0 0 0 2px $flt-form__color-highlight, inset 0 1px 2px rgba(0,0,0,.15);
+
+$flt-form__setting-input-box-shadow-valid       : 0 0 0 1px $flt-form__color-valid, inset 0 1px 2px rgba(0,0,0,.15);
+$flt-form__setting-input-box-shadow-valid-focus : 0 0 0 2px $flt-form__color-valid, inset 0 1px 2px rgba(0,0,0,.15);
 
 $flt-form__setting-input-box-shadow-error       : 0 0 0 1px $flt-form__color-error, inset 0 1px 2px rgba(0,0,0,.15);
 $flt-form__setting-input-box-shadow-error-focus : 0 0 0 2px $flt-form__color-error, inset 0 1px 2px rgba(0,0,0,.15);

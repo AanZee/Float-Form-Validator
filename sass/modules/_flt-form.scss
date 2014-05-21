@@ -55,14 +55,42 @@
 
 .flt-form__mainbox {
 	@include clearfix;
+	position: relative;
 	.flt-form__error-message {
 		@include arrow-on-top-line(8px, $flt-form__color-border-error-message, $flt-form__color-background-error-message, 15px);
 	}
 }
 
 
-.flt-form__mainbox-inline-group {
+.flt-form__inline-group {
 	@include clearfix;
+}
+
+
+.flt-form__icon-holder {
+	.flt-form__icon-check,
+	.flt-form__icon-exclamation {
+		width: 18px;
+		height: 18px;
+		line-height: 16px;
+		border-radius: 8px;
+		text-align: center;
+		color: white;
+		font-size: 9px;
+		position: absolute;
+		left: -9px;
+		top: 14px;
+		border: 2px solid $flt-form__color-background-inner;
+		display: none;
+	}
+
+	.flt-form__icon-check {
+		background-color: $flt-form__color-valid;
+	}
+
+	.flt-form__icon-exclamation {
+		background-color: $flt-form__color-error;
+	}
 }
 
 
@@ -279,8 +307,8 @@
 .flt-form__label-checkbox .flt-form__input-indicator {
 	border-radius: $flt-form__setting-border-radius-checkbox;
 	font-size: 12px;
-	&:before {
-		content: '\2714';
+	.flt-form__icon-check {
+		line-height: 16px;
 	}
 }
 
@@ -289,7 +317,7 @@
 //////////////////////////////////////////////////////////////
 
 
-.flt-form__fieldset-error {
+.flt-form__row-error {
 
 	.flt-form__label {
 		color: $flt-form__color-error;
@@ -319,6 +347,13 @@
 		}
 	}
 
+	.flt-form__icon-holder {
+		.flt-form__icon-exclamation {
+			display: block;
+		}
+	}
+
+
 }
 
 .flt-form__error-box {
@@ -338,6 +373,26 @@
 	box-shadow       : 0 0 0 1px $flt-form__color-border-error-message;
 }
 
+
+.flt-form__row-valid {
+	.flt-form__icon-holder {
+		.flt-form__icon-check {
+			display: block;
+		}
+	}
+	.flt-form__label-required {
+		&:after {
+			content: '*';
+			color: $flt-form__color-valid;
+		}
+	}
+	.flt-form__input-validate.flt-form__input {
+		box-shadow: $flt-form__setting-input-box-shadow-valid;
+		&:focus {
+			box-shadow: $flt-form__setting-input-box-shadow-valid-focus;
+		}
+	}
+}
 
 
 .flt-form__description {

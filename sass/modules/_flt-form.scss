@@ -20,6 +20,14 @@
 }
 
 
+.flt-form__top-error {
+	background-color: $flt-form__color-error-background;
+	margin: 20px 0;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+
 .flt-form__fieldset {
 	border-bottom : $flt-form__setting-border-bottom-fieldset;
 	> *:first-child {
@@ -47,7 +55,7 @@
 
 .flt-form__row {
 	padding: $flt-form__setting-padding-row;
-	> .flt-form__error-box .flt-form__error-message {
+	> .flt-form__messages .flt-form__message-error {
 		@include arrow-on-bottom-line(8px, $flt-form__color-border-error-message, $flt-form__color-background-error-message, 15px);
 	}
 }
@@ -56,7 +64,7 @@
 .flt-form__mainbox {
 	@include clearfix;
 	position: relative;
-	.flt-form__error-message {
+	.flt-form__message-error {
 		@include arrow-on-top-line(8px, $flt-form__color-border-error-message, $flt-form__color-background-error-message, 15px);
 	}
 }
@@ -325,7 +333,7 @@
 
 	.flt-form__label-radio,
 	.flt-form__label-checkbox {
-		background-color: $flt-form__setting-car-error-background;
+		background-color: $flt-form__color-error-background;
 		padding-left: $flt-form__setting-car-boxed-padding-left;
 		&:first-child {
 			border-top-left-radius: $flt-form__setting-border-radius;
@@ -356,12 +364,12 @@
 
 }
 
-.flt-form__error-box {
+.flt-form__messages {
 	@include clearfix;
 	margin: $flt-form__setting-error-box-margin;
 }
 
-.flt-form__error-message {
+.flt-form__message-error {
 	float            : left;
 	background-color : $flt-form__color-background-error-message;
 	color            : $flt-form__color-text;

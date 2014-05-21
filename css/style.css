@@ -48,6 +48,8 @@ a { color: #268bd2; text-decoration: none; padding-bottom: 3px; border-bottom: 1
 
 .flt-form__title { font-size: 48px; line-height: 54px; font-weight: bold; color: #268bd2; }
 
+.flt-form__top-error { background-color: rgba(220, 50, 47, 0.15); margin: 20px 0; padding-top: 20px; padding-bottom: 20px; }
+
 .flt-form__fieldset { border-bottom: 2px solid #e9dfbe; }
 .flt-form__fieldset > *:first-child { padding-top: 0; margin-top: 0; }
 .flt-form__fieldset > *:last-child { padding-bottom: 0; margin-bottom: 0; }
@@ -56,16 +58,16 @@ a { color: #268bd2; text-decoration: none; padding-bottom: 3px; border-bottom: 1
 .flt-form__subtitle { font-size: 24px; font-weight: bold; color: #268bd2; margin-top: 27px; margin-bottom: 9px; }
 
 .flt-form__row { padding: 7px 0; }
-.flt-form__row > .flt-form__error-box .flt-form__error-message { position: relative; }
-.flt-form__row > .flt-form__error-box .flt-form__error-message:before { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid white; pointer-events: none; position: absolute; left: 15px; content: ""; margin-left: -8px; bottom: -7px; z-index: 2; }
-.flt-form__row > .flt-form__error-box .flt-form__error-message:after { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #aaaaaa; pointer-events: none; position: absolute; left: 15px; content: ""; margin-left: -8px; bottom: -8px; }
+.flt-form__row > .flt-form__messages .flt-form__message-error { position: relative; }
+.flt-form__row > .flt-form__messages .flt-form__message-error:before { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid white; pointer-events: none; position: absolute; left: 15px; content: ""; margin-left: -8px; bottom: -7px; z-index: 2; }
+.flt-form__row > .flt-form__messages .flt-form__message-error:after { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid #aaaaaa; pointer-events: none; position: absolute; left: 15px; content: ""; margin-left: -8px; bottom: -8px; }
 
 .flt-form__mainbox { position: relative; }
 .flt-form__mainbox:before, .flt-form__mainbox:after { content: " "; display: table; }
 .flt-form__mainbox:after { clear: both; }
-.flt-form__mainbox .flt-form__error-message { position: relative; }
-.flt-form__mainbox .flt-form__error-message:before { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid white; pointer-events: none; position: absolute; left: 15px; content: ""; margin-left: -8px; top: -7px; z-index: 2; }
-.flt-form__mainbox .flt-form__error-message:after { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #aaaaaa; pointer-events: none; position: absolute; left: 15px; content: ""; margin-left: -8px; top: -8px; }
+.flt-form__mainbox .flt-form__message-error { position: relative; }
+.flt-form__mainbox .flt-form__message-error:before { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid white; pointer-events: none; position: absolute; left: 15px; content: ""; margin-left: -8px; top: -7px; z-index: 2; }
+.flt-form__mainbox .flt-form__message-error:after { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #aaaaaa; pointer-events: none; position: absolute; left: 15px; content: ""; margin-left: -8px; top: -8px; }
 
 .flt-form__inline-group:before, .flt-form__inline-group:after { content: " "; display: table; }
 .flt-form__inline-group:after { clear: both; }
@@ -133,11 +135,11 @@ a { color: #268bd2; text-decoration: none; padding-bottom: 3px; border-bottom: 1
 .flt-form__row-error .flt-form__input-validate.flt-form__input:focus { box-shadow: 0 0 0 2px #dc322f, inset 0 1px 2px rgba(0, 0, 0, 0.15); }
 .flt-form__row-error .flt-form__icon-holder .flt-form__icon-exclamation { display: block; }
 
-.flt-form__error-box { margin: 6px 0; }
-.flt-form__error-box:before, .flt-form__error-box:after { content: " "; display: table; }
-.flt-form__error-box:after { clear: both; }
+.flt-form__messages { margin: 6px 0; }
+.flt-form__messages:before, .flt-form__messages:after { content: " "; display: table; }
+.flt-form__messages:after { clear: both; }
 
-.flt-form__error-message { float: left; background-color: white; color: #073642; padding: 6px 14px; max-width: 400px; border-radius: 6px; font-size: 14px; line-height: 21px; box-shadow: 0 0 0 1px #aaaaaa; }
+.flt-form__message-error { float: left; background-color: white; color: #073642; padding: 6px 14px; max-width: 400px; border-radius: 6px; font-size: 14px; line-height: 21px; box-shadow: 0 0 0 1px #aaaaaa; }
 
 .flt-form__row-valid .flt-form__icon-holder .flt-form__icon-check { display: block; }
 .flt-form__row-valid .flt-form__label-required:after { content: '*'; color: #859900; }
@@ -167,7 +169,7 @@ a { color: #268bd2; text-decoration: none; padding-bottom: 3px; border-bottom: 1
   .flt-form__subtitle { padding-left: 200px; }
   .flt-form__row:before, .flt-form__row:after { content: " "; display: table; }
   .flt-form__row:after { clear: both; }
-  .flt-form__row > .flt-form__error-box { margin-left: 200px; }
+  .flt-form__row > .flt-form__messages { margin-left: 200px; }
   .flt-form__subbox { float: left; width: 200px; padding-right: 10px; text-align: right; }
   .flt-form__mainbox { float: right; width: 520px; padding-right: 120px; }
   .flt-form__label, .flt-form__label-radio, .flt-form__label-checkbox { padding-top: 10px; padding-bottom: 10px; }
@@ -187,7 +189,7 @@ a { color: #268bd2; text-decoration: none; padding-bottom: 3px; border-bottom: 1
   .flt-form__subtitle { padding-left: 200px; }
   .flt-form__row:before, .flt-form__row:after { content: " "; display: table; }
   .flt-form__row:after { clear: both; }
-  .flt-form__row > .flt-form__error-box { margin-left: 200px; }
+  .flt-form__row > .flt-form__messages { margin-left: 200px; }
   .flt-form__subbox { float: left; width: 200px; padding-right: 10px; text-align: right; }
   .flt-form__mainbox { float: right; width: 520px; padding-right: 120px; }
   .flt-form__label, .flt-form__label-radio, .flt-form__label-checkbox { padding-top: 10px; padding-bottom: 10px; }

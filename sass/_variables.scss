@@ -10,6 +10,7 @@ $flt-form__color-highlight                      : #268bd2;
 $flt-form__color-border-error-message           : #aaaaaa;
 
 $flt-form__color-error                          : #dc322f;
+$flt-form__color-error-background               : rgba($flt-form__color-error, .15);
 $flt-form__color-valid                          : #859900;
 $flt-form__color-warning                        : #FFCC00;
 
@@ -166,9 +167,6 @@ $flt-form__setting-car-indicator-box-shadow     : 0 0 0 1px #74787c; // fake bor
 $flt-form__setting-car-boxed-background         : rgba(0,0,0,.07);
 $flt-form__setting-car-boxed-padding-left       : 36px;
 $flt-form__setting-car-boxed-inidcator-left     : 11px;
-
-$flt-form__setting-car-error-background         : rgba($flt-form__color-error, .15);
-
 
 // Select 
 $flt-form__setting-select-box-shadow            : 0 0 0 1px #aaa;

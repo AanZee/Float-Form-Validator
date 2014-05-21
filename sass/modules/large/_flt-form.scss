@@ -21,7 +21,7 @@
 
 .flt-form__row {
 	@include clearfix;
-	> .flt-form__error-box {
+	> .flt-form__messages {
 		margin-left: $flt-form__setting-width-subbox-large;
 	}
 }

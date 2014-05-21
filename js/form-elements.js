@@ -41,7 +41,7 @@
 			var _this = this;
 
 			this.$input.on('keydown', function () {
-				_this.setNeutralState();
+				if ( ! _this.isValid) _this.setNeutralState();
 			});
 
 			this.$input.on('change', function () {
@@ -50,16 +50,57 @@
 					placeErrorsWhenInvalid: ['length']
 				});
 			});
+		}
+	});
 
-			this.$input.on('blur', function () {
+
+	/**
+	 * Number
+	 * ------------------------------------------------------
+	 * Simple text input fields inside a form element
+	 * this.$input is the text input
+	 */
+	$.FormValidator.addFormElement('number', {
+		getValue: function () {
+			return this.$input.val();
+		},
+
+		/**
+		 * @param {any} value - returned from getValue method above
+		 */
+		validation: function (value) {
+			var minlength = this.$input.prop('minlength');
+			var maxlength = this.$input.prop('maxlength');
+
+			// Required and length
+			return [
+				{ 'required': $.FormValidator.methods.required(value) },
+				{ 'number': $.FormValidator.methods.number(value) },
+				{ 'length': $.FormValidator.methods.length(value, minlength, maxlength) }
+			];
+		},
+
+		loadEvents: function () {
+			var _this = this;
+
+			this.$input.on('keydown', function () {
+				if ( ! _this.isValid) _this.setNeutralState();
+			});
+
+			this.$input.on('change', function () {
 				_this.validate({
-					eventType: 'blur',
+					eventType: 'change',
 					placeErrorsWhenInvalid: ['length']
 				});
 			});
 		}
 	});
 
+
+	/**
+	 * Email
+	 * ------------------------------------------------------
+	 */
 	$.FormValidator.addFormElement('email', {
 		getValue: function () {
 			return this.$input.val();
@@ -84,7 +125,7 @@
 			var _this = this;
 
 			this.$input.on('keydown', function () {
-				_this.setNeutralState();
+				if ( ! _this.isValid) _this.setNeutralState();
 			});
 
 			this.$input.on('change', function () {
@@ -93,16 +134,13 @@
 					placeErrorsWhenInvalid: ['email']
 				});
 			});
-
-			this.$input.on('blur', function () {
-				_this.validate({
-					eventType: 'blur',
-					placeErrorsWhenInvalid: ['email']
-				});
-			});
 		}
 	});
 
+
+	/**
+	 *
+	 */
 	$.FormValidator.addFormElement('phoneNL', {
 		getValue: function () {
 			return this.$input.val();
@@ -127,19 +165,12 @@
 			var _this = this;
 
 			this.$input.on('keydown', function () {
-				_this.setNeutralState();
+				if ( ! _this.isValid) _this.setNeutralState();
 			});
 
 			this.$input.on('change', function () {
 				_this.validate({
 					eventType: 'change',
-					placeErrorsWhenInvalid: ['phoneNL']
-				});
-			});
-
-			this.$input.on('blur', function () {
-				_this.validate({
-					eventType: 'blur',
 					placeErrorsWhenInvalid: ['phoneNL']
 				});
 			});

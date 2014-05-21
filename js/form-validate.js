@@ -274,7 +274,7 @@
 
 		// If the implemntation exists for the element type
 		if ( FormValidator.formElements[elementType] ) {
-			this.typeMethods = FormValidator.formElements[elementType];
+			this.adapter = FormValidator.formElements[elementType];
 		} else {
 			throw new Error('(FormElement): elementType of "' + elementType + '" is not supported');
 		}
@@ -298,13 +298,14 @@
 
 	FormElement.prototype.getValue = function () {
 		var _this = this;
-		return this.typeMethods.getValue.apply(_this);
+		// Proxy for getValue
+		return this.adapter.getValue.apply(_this);
 	};
 
 	FormElement.prototype.init = function () {
 		var _this = this;
 		// load events
-		this.typeMethods.loadEvents.apply(_this);
+		this.adapter.loadEvents.apply(_this);
 	};
 
 	/**
@@ -334,15 +335,12 @@
 	FormElement.prototype._checkErrors = function (errorStack) {
 		return $.map(errorStack, function (obj) {
 			for (var key in obj) {
-				console.log(key, ! obj[key]);
 				if ( ! obj[key]) return key;
 			}
 		});
 	};
 
 	FormElement.prototype.setValidState = function () {
-		this.isValid = true;
-
 		this.removeMessages();
 
 		this.$element
@@ -351,16 +349,12 @@
 	};
 
 	FormElement.prototype.setErrorState = function () {
-		this.isValid = false;
-
 		this.$element
 			.addClass( this.settings.rowErrorClass )
 			.removeClass( this.settings.rowValidClass );
 	};
 
 	FormElement.prototype.setNeutralState = function () {
-		this.isValid = false;
-
 		this.removeMessages();
 
 		this.$element
@@ -374,18 +368,20 @@
 	FormElement.prototype.validate = function (options) {
 		var _this = this;
 
-		if (this.settings.debug) {
-			console.log('(FormElement.validate)(debug): ', options);
-		}
-
 		// Get the error stack from the validation method
-		var errorStack = this.typeMethods.validation.apply(_this, [this.typeMethods.getValue.apply(_this)] );
+		var errorStack = this.adapter.validation.apply(_this, [this.adapter.getValue.apply(_this)] );
 
 		// Turn map into array
 		var errors = this._checkErrors(errorStack);
 
+		if (this.settings.debug) {
+			console.log('(FormElement.validate)(debug): options: ', options, ' errors: ', errors);
+		}
 
 		if ( errors.length > 0) {
+			// Change state only on validate
+
+			this.isValid = false;
 			// There are errors, neutralize first
 			this.setNeutralState();
 
@@ -393,7 +389,7 @@
 				// Place the error only when the first error in the stack triggers the error
 
 				if (this.settings.debug) {
-					console.log('(FormElement.validate)(debug): Place errors because error[0] "' + errors[0] + '" is in options.placeErrorsWhenInvalid: ', options.placeErrorsWhenInvalid);
+					console.log('(FormElement.validate)(debug): Place errors because errors[0] "' + errors[0] + '" is in options.placeErrorsWhenInvalid: ', options.placeErrorsWhenInvalid);
 				}
 
 				this.setErrorState();
@@ -403,6 +399,9 @@
 			}
 
 		} else {
+			// Change state only on validate
+			this.isValid = true;
+
 			// The form element is valid
 			this.setValidState();
 		}

@@ -40,7 +40,7 @@
 		messages: {},
 		groups: {},
 		rules: {},
-		errorClass: "error",
+		errorClass: "flt-form__row-error",
 		validClass: "valid",
 		errorElement: "label",
 		rowClass: "flt-form__row",
@@ -99,13 +99,14 @@
 	 */
 	FormValidator.formElements['text'] = {
 		getValue: function () {
-			debugger
 			return this.$input.val();
 		},
+
 		/**
 		 * @param {any} value - returned from getValue method above
 		 */
 		validation: function (value) {
+			// Support HTML5 properties
 			var minlength = this.$input.prop('minlength');
 			var maxlength = this.$input.prop('maxlength');
 
@@ -115,6 +116,7 @@
 				{ 'length': FormValidator.methods.length(value, minlength, maxlength) }
 			];
 		},
+
 		loadEvents: function () {
 			var _this = this;
 
@@ -158,7 +160,6 @@
 	 * Static method
 	 */
 	FormValidator.createMessage = function (errorType, messageType) {
-
 		// Get the message template with the messageType given or revert to the default
 		var messageTemplate = this.messageTemplates[messageType] || this.messageTemplates[ this.settings.messageType ];
 
@@ -174,7 +175,7 @@
 		var _this = this;
 		var foundNames = {};
 
-		return this.$form.find('.flt-form__element').formElement();
+		return this.$form.find('[data-form-element]').formElement();
 
 		// return this.$form.find('input, select, textarea')
 		// 			.not(":submit, :reset, :image, [disabled]")

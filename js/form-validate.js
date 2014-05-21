@@ -25,6 +25,8 @@
 		// Set the messages
 		this.settings.messages = FormValidator.messages;
 
+		console.log(this);
+
 		// Defined form field array
 		this.formElements = [];
 
@@ -54,10 +56,13 @@
 	FormValidator.messages = {
 		generic: "An error occurred",
 		required: "This field is required",
-		email: "This is not a (correct) email address"
+		email: "This is not a correct email address"
 	};
 
 	FormValidator.messageTemplates = {
+		note: function (text) {
+			return '<p class="flt-form__message-note">' + text + '</p>';
+		},
 		error: function (text) {
 			return '<p class="flt-form__message-error">' + text + '</p>';
 		}
@@ -87,27 +92,68 @@
 			return true;
 		},
 
+		// https://github.com/jzaefferer/jquery-validation/blob/master/src/core.js
+		// From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
+		// Retrieved 2014-01-14
+		// If you have a problem with this implementation, report a bug against the above spec
+		// Or use custom methods to implement your own email validation
 		email: function (value) {
-			// https://github.com/jzaefferer/jquery-validation/blob/master/src/core.js
-			// From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
-			// Retrieved 2014-01-14
-			// If you have a problem with this implementation, report a bug against the above spec
-			// Or use custom methods to implement your own email validation
 			return /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( value );
 		}
 	};
 
 	/**
 	 * Static method
+	 * add validation method
+	 * @param {string} type
+	 * @param {function} fn
+	 */
+	FormValidator.addMethod = function (type, fn) {
+		if (this.methods[type]) {
+			throw new Error('(FormValidator.addMethod): method with type "' + type + '" is already registered as a validation method');
+		} else {
+			this.methods[type] = fn;
+		}
+	};
+
+	/**
+	 * Static method
+	 * add form element types
+	 * @param {string} type
+	 * @param {object} object - methods used by FormElement
+	 */
+	FormValidator.addFormElement = function (type, object) {
+		if (this.formElements[type]) {
+			throw new Error('(FormValidator.addFormElement): form element with type "' + type + '" is already registered as a Form Element type');
+		} else {
+			this.formElements[type] = object;
+		}
+	};
+
+	/**
+	 * Static method
+	 * TODO: Shouldn't be static because uses the defaults
 	 * @param {string} errorType
 	 * @param {string} messageType
 	 * @return {string}
 	 */
 	FormValidator.createMessage = function (errorType, messageType) {
-		// Get the message template with the messageType given or revert to the default
-		var messageTemplate = this.messageTemplates[messageType] || this.messageTemplates[ this.settings.messageType ];
+		var messageTemplate, message;
 
-		var message = this.messages[errorType] || this.messages[ this.settings.errorType ];
+		// Get the message template with the messageType given or revert to the default
+		if ( this.messageTemplates.hasOwnProperty( messageType ) ) {
+			messageTemplate = this.messageTemplates[ messageType ];
+		} else {
+			messageTemplate = this.messageTemplates[ this.defaults.messageType ];
+		}
+
+		// Get the wanted message or get the default
+		if ( this.messages.hasOwnProperty( errorType ) ) {
+			message = this.messages[ errorType ];
+		} else {
+			console.log(this.messages, this.defaults.errorType);
+			message = this.messages[ this.defaults.errorType ];
+		}
 
 		return messageTemplate( message );
 	};
@@ -116,7 +162,6 @@
 	FormValidator.setDefaults = function( settings ) {
 		$.extend( FormValidator.defaults, settings );
 	};
-
 
 	/**
 	 * Initializer
@@ -136,17 +181,6 @@
 
 		// Load events
 		this.loadEvents();
-	};
-
-	/**
-	 * Static method
-	 */
-	FormValidator.addFormElement = function (type, object) {
-		if (this.formElements[type]) {
-			throw new Error('(FormValidator.addFormElement): form element with type "' + type + '" is already registered as a Form Element type');
-		} else {
-			this.formElements[type] = object;
-		}
 	};
 
 	/**
@@ -326,6 +360,8 @@
 
 	FormElement.prototype.setNeutralState = function () {
 		this.isValid = false;
+
+		this.removeMessages();
 
 		this.$element
 			.removeClass( this.settings.rowErrorClass )

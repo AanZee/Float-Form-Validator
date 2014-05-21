@@ -40,6 +40,10 @@
 		loadEvents: function () {
 			var _this = this;
 
+			this.$input.on('keydown', function () {
+				_this.setNeutralState();
+			});
+
 			this.$input.on('change', function () {
 				_this.validate({
 					eventType: 'change',
@@ -79,6 +83,10 @@
 		loadEvents: function () {
 			var _this = this;
 
+			this.$input.on('keydown', function () {
+				_this.setNeutralState();
+			});
+
 			this.$input.on('change', function () {
 				_this.validate({
 					eventType: 'change',
@@ -94,5 +102,49 @@
 			});
 		}
 	});
+
+	$.FormValidator.addFormElement('phoneNL', {
+		getValue: function () {
+			return this.$input.val();
+		},
+
+		/**
+		 * @param {any} value - returned from getValue method above
+		 */
+		validation: function (value) {
+			// Support HTML5 properties
+			var minlength = this.$input.prop('minlength');
+			var maxlength = this.$input.prop('maxlength');
+
+			// Required and length
+			return [
+				{ 'required': $.FormValidator.methods.required(value) },
+				{ 'phoneNL': $.FormValidator.methods.email(value) }
+			];
+		},
+
+		loadEvents: function () {
+			var _this = this;
+
+			this.$input.on('keydown', function () {
+				_this.setNeutralState();
+			});
+
+			this.$input.on('change', function () {
+				_this.validate({
+					eventType: 'change',
+					placeErrorsWhenInvalid: ['phoneNL']
+				});
+			});
+
+			this.$input.on('blur', function () {
+				_this.validate({
+					eventType: 'blur',
+					placeErrorsWhenInvalid: ['phoneNL']
+				});
+			});
+		}
+	});
+
 
 }(jQuery, window));

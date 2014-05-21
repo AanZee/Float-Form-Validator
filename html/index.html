@@ -99,17 +99,17 @@
 					</div>
 				</div>
 
-				<div class="flt-form__row flt-form__row-required flt-form__row-error">
+				<div class="flt-form__row flt-form__row-required" data-form-element="phoneNL">
 					<div class="flt-form__subbox">
 						<label class="flt-form__label flt-form__label-required" for="phonenumber">Phone number</label>
 					</div>
 					<div class="flt-form__mainbox">
 						<input type="tel" name="phonenumber" id="phonenumber" class="flt-form__input flt-form__input-tel flt-form__input-width-m flt-form__input-validate" required autocomplete="off" autocorrect="off" spellcheck="false" />
-						<p class="flt-form__description" data-error-placement="before">Put your description here</p>
 						<div class="flt-form__icon-holder">
 							<i class="flt-form__icon-check"></i>
 							<i class="flt-form__icon-exclamation"></i>
 						</div>
+						<div class="flt-form__messages"><!-- Message placeholder --></div>
 					</div>
 				</div>
 
@@ -240,6 +240,7 @@
 	<script>window.jQuery || document.write('<script src="../js/jquery-1.11.0.min.js"><\/script>')</script>
 
 	<script src="../js/form-validate.js"></script>
+	<script src="../js/form-methods.js"></script>
 	<script src="../js/form-elements.js"></script>
 	<script src="../js/form-validate-nl.js"></script>
 	<script>

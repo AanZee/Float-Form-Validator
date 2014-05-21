@@ -46,8 +46,7 @@
 
 			this.$input.on('change', function () {
 				_this.validate({
-					eventType: 'change',
-					placeErrorsWhenInvalid: ['length']
+					eventType: 'change'
 				});
 			});
 		}
@@ -89,8 +88,7 @@
 
 			this.$input.on('change', function () {
 				_this.validate({
-					eventType: 'change',
-					placeErrorsWhenInvalid: ['number', 'length']
+					eventType: 'change'
 				});
 			});
 		}
@@ -99,8 +97,6 @@
 	/**
 	 * Radio
 	 * ------------------------------------------------------
-	 * Simple text input fields inside a form element
-	 * this.$input is the text input
 	 */
 	$.FormValidator.addFormElement('radio', {
 		getValue: function () {
@@ -122,8 +118,37 @@
 
 			this.$input.on('change', function () {
 				_this.validate({
-					eventType: 'change',
-					placeErrorsWhenInvalid: ['number', 'length']
+					eventType: 'change'
+				});
+			});
+		}
+	});
+
+	/**
+	 * Checkbox
+	 * ------------------------------------------------------
+	 */
+	$.FormValidator.addFormElement('checkbox', {
+		getValue: function () {
+			return this.$input.filter(':checked').length !== 0;
+		},
+
+		/**
+		 * @param {any} value - returned from getValue method above
+		 */
+		validation: function (value) {
+			// Required and length
+			return [
+				{ 'required': !! value }
+			];
+		},
+
+		loadEvents: function () {
+			var _this = this;
+
+			this.$input.on('change', function () {
+				_this.validate({
+					eventType: 'change'
 				});
 			});
 		}
@@ -163,8 +188,7 @@
 
 			this.$input.on('change', function () {
 				_this.validate({
-					eventType: 'change',
-					placeErrorsWhenInvalid: ['email']
+					eventType: 'change'
 				});
 			});
 		}
@@ -189,8 +213,8 @@
 
 			// Required and length
 			return [
-				{ 'required': $.FormValidator.methods.required(value) },
-				{ 'phoneNL': $.FormValidator.methods.email(value) }
+				{ 'required': $.FormValidator.methods.required(value) }
+				// { 'phoneNL': $.FormValidator.methods.email(value) }
 			];
 		},
 
@@ -203,8 +227,7 @@
 
 			this.$input.on('change', function () {
 				_this.validate({
-					eventType: 'change',
-					placeErrorsWhenInvalid: ['phoneNL']
+					eventType: 'change'
 				});
 			});
 		}

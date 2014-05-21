@@ -11,14 +11,13 @@
 
 ;(function ( $, window, undefined) {
 
-	/**
-	 * Text
-	 * ------------------------------------------------------
-	 * Simple text input fields inside a form element
-	 * this.$input is the text input
-	 */
+
 	$.FormValidator.addMethod("phoneNL", function(value, element) {
 		return /^((\+|00(\s|\s?\-\s?)?)31(\s|\s?\-\s?)?(\(0\)[\-\s]?)?|0)[1-9]((\s|\s?\-\s?)?[0-9]){8}$/.test(value);
+	});
+
+	$.FormValidator.addMethod("postalcodeNL", function(value, element) {
+		return this.optional(element) || /^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test(value);
 	});
 
 }(jQuery, window));

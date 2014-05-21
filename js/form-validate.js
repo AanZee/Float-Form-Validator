@@ -205,11 +205,19 @@
 				console.info('Validating form: ', _this.$form);
 			}
 
+			var errors = [];
+
 			// Fire the validate method on our form elements
 			_this.$formElements.formElement('validate', {
 				eventType: 'formSubmit'
+			}, function () {
+				if ( ! this.isValid) errors.push(this);
 			});
-			return false;
+
+			if (errors.length > 0) {
+				// show top message
+				return false;
+			}
 		});
 
 	};

@@ -25,8 +25,6 @@
 		// Set the messages
 		this.settings.messages = FormValidator.messages;
 
-		console.log(this);
-
 		// Defined form field array
 		this.formElements = [];
 
@@ -39,7 +37,7 @@
 	 */
 	FormValidator.defaults = {
 		// A data selector is required
-		formElementDataSelector: '[data-form-element]',
+		formElementDataSelector: '[data-form-element-type]',
 		rowClass: "flt-form__row",
 
 		// Used if the chosen message type is not supported
@@ -69,7 +67,7 @@
 		}
 	};
 
-	FormValidator.methods = {
+	FormValidator.tests = {
 		/**
 		 * Checks for empty values, only supports text
 		 * @param {string} value
@@ -109,25 +107,68 @@
 	 * @param {string} type
 	 * @param {function} fn
 	 */
-	FormValidator.addMethod = function (type, fn) {
-		if (this.methods[type]) {
-			throw new Error('(FormValidator.addMethod): method with type "' + type + '" is already registered as a validation method');
+	FormValidator.addTest = function (type, fn) {
+		if (this.tests[type]) {
+			throw new Error('(FormValidator.addMethod): test with type "' + type + '" is already registered as a validation method');
 		} else {
-			this.methods[type] = fn;
+			this.tests[type] = fn;
 		}
 	};
 
 	/**
 	 * Static method
+	 * @param {string} type - text,email etc.
+	 * @return {bool} is FormElement supported?
+	 */
+	FormValidator.isFormElementSupported = function ( type ) {
+		return !! ( this.formElements[type] );
+	};
+
+	/**
+	 * Object.create polyfill
+	 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+	 */
+	if (typeof Object.create != 'function') {
+		(function () {
+			var F = function () {};
+				Object.create = function (o) {
+					if (arguments.length > 1) {
+						throw Error('Second argument not supported');
+					}
+					if (o === null) {
+						throw Error('Cannot set a null [[Prototype]]');
+					}
+					if (typeof o != 'object') {
+						throw TypeError('Argument must be an object');
+					}
+					F.prototype = o;
+					return new F();
+				};
+		})();
+	}
+
+	/**
+	 * Static method
 	 * add form element types
 	 * @param {string} type
-	 * @param {object} object - methods used by FormElement
+	 * @param {object} adapter - methods used by FormElement
 	 */
-	FormValidator.addFormElement = function (type, object) {
+	FormValidator.addFormElement = function (type, adapter) {
 		if (this.formElements[type]) {
 			throw new Error('(FormValidator.addFormElement): form element with type "' + type + '" is already registered as a Form Element type');
 		} else {
-			this.formElements[type] = object;
+			// Register the adapter by creating a function which extends FormElement
+			// creating a new function with the type wanted
+			this.formElements[type] = function () {
+				// Call the super
+				FormElement.call(this);
+				// Extend this with the adapter
+				$.extend(this, adapter);
+				this.type = type;
+			};
+
+			// Inherit from FormElement
+			this.formElements[type].prototype = Object.create(FormElement.prototype);
 		}
 	};
 
@@ -258,10 +299,14 @@
 		}
 	};
 
-
 	/** Also publish the class in the $ namespace */
 	$.FormValidator = FormValidator;
 
+	/**
+	 * Form Element
+	 * @constructor
+	 */
+	function FormElement () {}
 
 	FormElement.defaults = {
 		debug: true,
@@ -271,57 +316,63 @@
 	};
 
 	/**
-	 * Form Element
-	 * @constructor
 	 * @param {object} element - The HTML form element
 	 * @param {object} options - An option map
+	 * @return this
 	 */
-	function FormElement (element, options) {
+	FormElement.prototype.init = function (element, options) {
+		// Save both references to the element
+		this.element = element;
 		this.$element = $(element);
-
-		var elementType = this.$element.data('form-element');
-
-		// If the implemntation exists for the element type
-		if ( FormValidator.formElements[elementType] ) {
-			this.adapter = FormValidator.formElements[elementType];
-		} else {
-			throw new Error('(FormElement): elementType of "' + elementType + '" is not supported');
-		}
 
 		// Extend the defaults with the passed options and the Form
 		this.settings = $.extend( true, {}, FormElement.defaults, options);
 
-		// Get the input of this form element
-		this.$input = this.$element.find('input');
-
-		// Get the message container
-		this.$messageContainer = this.$element.find('.' + this.settings.messageContainerClass);
-
+		// Create empty errors
 		this.errors = [];
 
 		// Initial valid state
 		this.isValid = false;
 
-		this.init();
-	}
+		// Seperate some initializers so they can easily be extended by the adapters
+		this.initInput();
+		this.initMessages();
+		this.loadEvents();
 
-	FormElement.prototype.getValue = function () {
-		var _this = this;
-		// Proxy for getValue
-		return this.adapter.getValue.apply(_this);
+		// TODO: implement reveal pattern with private methods
+		return this;
 	};
 
-	FormElement.prototype.init = function () {
-		var _this = this;
-		// load events
-		this.adapter.loadEvents.apply(_this);
+	/**
+	 * Can be used to implement more advanced elements
+	 * @return this
+	 */
+	FormElement.prototype.initInput = function () {
+		// Get the input of this form element
+		this.$input = this.$element.find('input');
+
+		return this;
+	};
+
+	FormElement.prototype.initMessages = function () {
+		// Get the message container
+		this.$messageContainer = this.$element.find('.' + this.settings.messageContainerClass);
+
+		return this;
+	};
+
+	/**
+	 * @return value
+	 */
+	FormElement.prototype.getValue = function () {
+		return this.$input.val();
 	};
 
 	/**
 	 * @param {string} errorType - required etc.
 	 */
 	FormElement.prototype.placeError = function (errorType) {
-		this.placeMessage( FormValidator.createMessage(errorType, 'error') );
+		return this.placeMessage( FormValidator.createMessage(errorType, 'error') );
 	};
 
 	/**
@@ -331,15 +382,20 @@
 		if (this.settings.debug) {
 			console.log('(FormElement.placeMessage)(debug): ' + message);
 		}
+
 		this.$messageContainer.html(message);
+
+		return this;
 	};
 
 	FormElement.prototype.removeMessages = function () {
 		this.$messageContainer.empty();
+		return this;
 	};
 
 	/**
 	 * @param {object} errorStack - { 'errorName' : bool }
+	 * @return {array} errors
 	 */
 	FormElement.prototype._checkErrors = function (errorStack) {
 		return $.map(errorStack, function (obj) {
@@ -355,20 +411,34 @@
 		this.$element
 			.addClass( this.settings.rowValidClass )
 			.removeClass( this.settings.rowErrorClass );
+
+		return this;
 	};
 
 	FormElement.prototype.setErrorState = function () {
 		this.$element
 			.addClass( this.settings.rowErrorClass )
 			.removeClass( this.settings.rowValidClass );
+
+		return this;
 	};
 
+	/**
+	 * @return this
+	 */
 	FormElement.prototype.setNeutralState = function () {
 		this.removeMessages();
 
 		this.$element
 			.removeClass( this.settings.rowErrorClass )
 			.removeClass( this.settings.rowValidClass );
+
+		return this;
+	};
+
+	FormElement.prototype.loadEvents = function () {
+		console.log('(FormElement.prototype.loadEvents): not implemented by the adapter');
+		return this;
 	};
 
 	/**
@@ -378,7 +448,7 @@
 		var _this = this;
 
 		// Get the error stack from the validation method
-		var errorStack = this.adapter.validation.apply(_this, [this.adapter.getValue.apply(_this)] );
+		var errorStack = this.validation( this.getValue() );
 
 		// Turn map into array
 		var errors = this._checkErrors(errorStack);
@@ -416,22 +486,42 @@
 		}
 
 		if (callback && typeof callback === 'function') callback.apply(this);
+
+		return this;
 	};
 
 	/**
-	 * jQuery plugin wrapper for form elements
+	 * jQuery inspiredplugin wrapper for form elements
+	 * ------------------------------------------------------
+	 * Instead of always returning the FormElement, the subclass such
+	 * as text/email is created if the type is available
 	 */
 	$.fn.formElement = function (options) {
 		var args = arguments;
 		// Check the type of the options var
 		if (options === undefined || typeof options === 'object') {
+
 			// If no options are passed, or the options var is an object
 			// it means that this is a 'normal' validator call
 			return this.each(function () {
+
+				// Get the form element type
+				var type = $(this).data('form-element-type');
+
 				// Check if this element already has a validator class loaded
 				if ( ! $.data(this, 'formElement')) {
 					// If not, create the class and save it to the element
-					$.data(this, 'formElement', new FormElement( this, options ));
+
+					if ( $.FormValidator.isFormElementSupported( type ) ) {
+						// Create the desired form element if supported
+						console.log('($.fn.formElement): FormElement type is supported "' + type + '"');
+						$.data( this, 'formElement', (new $.FormValidator.formElements[ type ]).init(this, options) );
+
+					} else {
+						console.error('($.fn.formElement): FormElement type "' + type + '" is not supported default FormElement used');
+						$.data( this, 'formElement', new FormElement().init(this, options) );
+					}
+
 				}
 			});
 		} else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {

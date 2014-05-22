@@ -40,7 +40,7 @@
 
 				<h2 class="flt-form__subtitle">Personal information</h2>
 
-				<div class="flt-form__row flt-form__row-required" data-form-element="radio">
+				<div class="flt-form__row flt-form__row-required" data-form-element-type="radio">
 					<div class="flt-form__subbox">
 						<label class="flt-form__label flt-form__label-required">Salution</label>
 					</div>
@@ -57,7 +57,7 @@
 					</div>
 				</div>
 
-				<div class="flt-form__row flt-form__row-required" data-form-element="text">
+				<div class="flt-form__row flt-form__row-required" data-form-element-type="text">
 					<div class="flt-form__subbox">
 						<label class="flt-form__label flt-form__label-required flt-form__label" for="full-name">Full name</label>
 					</div>
@@ -72,7 +72,7 @@
 
 				</div>
 
-				<div class="flt-form__row flt-form__row-required" data-form-element="number">
+				<div class="flt-form__row flt-form__row-required" data-form-element-type="number">
 					<div class="flt-form__subbox">
 						<label class="flt-form__label flt-form__label-required" for="age">Age</label>
 					</div>
@@ -86,7 +86,7 @@
 					</div>
 				</div>
 
-				<div class="flt-form__row flt-form__row-required" data-form-element="email">
+				<div class="flt-form__row flt-form__row-required" data-form-element-type="email">
 					<div class="flt-form__subbox">
 						<label class="flt-form__label flt-form__label-required" for="emailaddress">Email address</label>
 					</div>
@@ -101,7 +101,7 @@
 				</div>
 
 				<!-- PhoneNL is not used -->
-				<div class="flt-form__row flt-form__row-required" data-form-element="phoneNL">
+				<div class="flt-form__row flt-form__row-required" data-form-element-type="phoneNL">
 					<div class="flt-form__subbox">
 						<label class="flt-form__label flt-form__label-required" for="phonenumber">Phone number</label>
 					</div>
@@ -121,7 +121,7 @@
 
 				<h2 class="flt-form__subtitle">Post address</h2>
 
-				<div class="flt-form__row flt-form__row-required" data-form-element="text">
+				<div class="flt-form__row flt-form__row-required" data-form-element-type="text">
 					<div class="flt-form__subbox">
 						<label class="flt-form__label flt-form__label-size-s flt-form__label-required" for="street">Street name and number</label>
 					</div>
@@ -135,7 +135,7 @@
 					</div>
 				</div>
 
-				<div class="flt-form__row flt-form__row-required" data-form-element="text">
+				<div class="flt-form__row flt-form__row-required" data-form-element-type="text">
 					<div class="flt-form__subbox">
 						<label class="flt-form__label flt-form__label-required" for="zipcode">Postal code</label>
 					</div>
@@ -149,7 +149,7 @@
 					</div>
 				</div>
 
-				<div class="flt-form__row flt-form__row-required" data-form-element="text">
+				<div class="flt-form__row flt-form__row-required" data-form-element-type="text">
 					<div class="flt-form__subbox">
 						<label class="flt-form__label flt-form__label-required" for="city">City</label>
 					</div>
@@ -191,7 +191,7 @@
 
 			<fieldset class="flt-form__fieldset">
 
-				<div class="flt-form__row flt-form__row-required" data-form-element="text">
+				<div class="flt-form__row flt-form__row-required" data-form-element-type="text">
 					<div class="flt-form__subbox">
 						<label class="flt-form__label flt-form__label-required" for="password">Password</label>
 					</div>
@@ -217,7 +217,7 @@
 					</div>
 				</div>
 
-				<div class="flt-form__row flt-form__row-required" data-form-element="checkbox">
+				<div class="flt-form__row flt-form__row-required" data-form-element-type="checkbox">
 					<div class="flt-form__mainbox">
 						<div class="flt-form__inline-group">
 							<label class="flt-form__label-checkbox flt-form__label-checkbox-solid"><input type="checkbox" name="agree-terms" id="agree-terms" class="flt-form__input-checkbox flt-form__input-validate" required><span class="flt-form__input-indicator"><i class="flt-form__icon-check"></i></span>I agree to the terms &amp; conditions</label>
@@ -248,8 +248,8 @@
 	<script>window.jQuery || document.write('<script src="../js/jquery-1.11.0.min.js"><\/script>')</script>
 
 	<script src="../js/form-validate.js"></script>
-	<script src="../js/form-methods.js"></script>
-	<script src="../js/form-elements.js"></script>
+	<script src="../js/form-tests.js"></script>
+	<script src="../js/form-element-types.js"></script>
 	<script src="../js/form-validate-nl.js"></script>
 	<script>
 		$('.flt-form').formValidate({

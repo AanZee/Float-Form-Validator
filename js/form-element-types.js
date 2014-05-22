@@ -2,11 +2,12 @@
  *  Form Element types
  *  ------------------------------------------------------
  *  Project: float.form-validate.js
- *  Description: A plugin that can validate form fields
+ *  Description: Adapters which extend the functionality
  *  Author: Aan Zee (frontend@aanzee.nl)
  *  GitHub: https://github.com/AanZee/validate
  *  Version: 0.0.1
  *  License: MIT
+
  */
 
 ;(function ( $, window, undefined) {
@@ -18,11 +19,16 @@
 	 * this.$input is the text input
 	 */
 	$.FormValidator.addFormElement('text', {
+
+		/**
+		 * @return value
+		 */
 		getValue: function () {
 			return this.$input.val();
 		},
 
 		/**
+		 * Not to confuse with validate
 		 * @param {any} value - returned from getValue method above
 		 */
 		validation: function (value) {
@@ -32,8 +38,8 @@
 
 			// Required and length
 			return [
-				{ 'required': $.FormValidator.methods.required(value) },
-				{ 'length': $.FormValidator.methods.length(value, minlength, maxlength) }
+				{ 'required': $.FormValidator.tests.required(value) },
+				{ 'length': $.FormValidator.tests.length(value, minlength, maxlength) }
 			];
 		},
 
@@ -51,7 +57,6 @@
 			});
 		}
 	});
-
 
 	/**
 	 * Number
@@ -73,9 +78,9 @@
 
 			// Required and length
 			return [
-				{ 'required': $.FormValidator.methods.required(value) },
-				{ 'number': $.FormValidator.methods.number(value) },
-				{ 'length': $.FormValidator.methods.length(value, minlength, maxlength) }
+				{ 'required': $.FormValidator.tests.required(value) },
+				{ 'number': $.FormValidator.tests.number(value) },
+				{ 'length': $.FormValidator.tests.length(value, minlength, maxlength) }
 			];
 		},
 
@@ -109,7 +114,7 @@
 		validation: function (value) {
 			// Required and length
 			return [
-				{ 'required': $.FormValidator.methods.required(value) }
+				{ 'required': $.FormValidator.tests.required(value) }
 			];
 		},
 
@@ -129,6 +134,9 @@
 	 * ------------------------------------------------------
 	 */
 	$.FormValidator.addFormElement('checkbox', {
+		/**
+		 * @return {bool} is checked
+		 */
 		getValue: function () {
 			return this.$input.filter(':checked').length !== 0;
 		},
@@ -160,10 +168,6 @@
 	 * ------------------------------------------------------
 	 */
 	$.FormValidator.addFormElement('email', {
-		getValue: function () {
-			return this.$input.val();
-		},
-
 		/**
 		 * @param {any} value - returned from getValue method above
 		 */
@@ -174,8 +178,8 @@
 
 			// Required and length
 			return [
-				{ 'required': $.FormValidator.methods.required(value) },
-				{ 'email': $.FormValidator.methods.email(value) }
+				{ 'required': $.FormValidator.tests.required(value) },
+				{ 'email': $.FormValidator.tests.email(value) }
 			];
 		},
 
@@ -199,10 +203,6 @@
 	 *
 	 */
 	$.FormValidator.addFormElement('phoneNL', {
-		getValue: function () {
-			return this.$input.val();
-		},
-
 		/**
 		 * @param {any} value - returned from getValue method above
 		 */
@@ -213,8 +213,7 @@
 
 			// Required and length
 			return [
-				{ 'required': $.FormValidator.methods.required(value) }
-				// { 'phoneNL': $.FormValidator.methods.email(value) }
+				{ 'required': $.FormValidator.tests.required(value) }
 			];
 		},
 

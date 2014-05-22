@@ -89,7 +89,7 @@ Implementing Form element adapters is quite easy, for most use cases you can imp
 Method | Arguments | Return type | Description
 --- | --- | --- | ---
 getValue | none | value {any} | Gets the desired value from you input field(s) or other element(s)
-validation | value {any} | Error stack {array} | Takes the value by getValue and checks this value agains validation methods
+validation | value `any` | Error stack `array` | Takes the value by getValue and checks this value agains validation methods
 loadEvents | none | this | Apply events to your input elements, and call `this.validate`
 
 ## Validation method in depth
@@ -163,12 +163,12 @@ setErrorState | none | `this` | Sets the error state on a form element, only vis
 setNeutralState | none | `this` | Removes all state of a form element, only visual (includes removal of messages)
 initInput | none | `this` | Initializer for `this.$input` by default
 initMessages | none | `this` | Initializer for `this.$messageContainer` by default
-placeMessage | message {string} | `this` | Puts a string in the message container by default
-placeError | errorType {string} | `this` | Creates the error and calls `placeMessage` by default
+placeMessage | message `string` | `this` | Puts a string in the message container by default
+placeError | errorType `string` | `this` | Creates the error and calls `placeMessage` by default
 removeMessages | none | `this` | Clears the message container
-_checkErrors | errorStack {object} | errors {array} | Puts errors which are true and pushes them to an array. Be careful implementing this method.
-validate | options {object}, callback {function} | `this` | Main validate method which sets `this.isValid` state and valid/neutral/error state. Be careful implementing this method
-init | element {element}, options {object} | `this` | Constructor of the FormElement. Be careful implementing this method
+_checkErrors | errorStack `object` | errors {array} | Puts errors which are true and pushes them to an array. Be careful implementing this method.
+validate | options `object`, callback {function} | `this` | Main validate method which sets `this.isValid` state and valid/neutral/error state. Be careful implementing this method
+init | element `element`, options `object` | `this` | Constructor of the FormElement. Be careful implementing this method
 
 
 

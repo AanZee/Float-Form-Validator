@@ -8,7 +8,7 @@ This plugin can be used to validate forms and is part of Aan Zee's [Float Fronte
 Step 1. Clone or download the repo.
 
 Step 2. Include all the script tags in your HTML
-```
+```html
 <script src="../js/form-validate.js"></script>
 <script src="../js/form-tests.js"></script>
 <script src="../js/form-element-types.js"></script>
@@ -16,7 +16,7 @@ Step 2. Include all the script tags in your HTML
 
 Step 3. Call the Form validator on your form tag
 
-```
+```javascript
 $('.flt-form').formValidate();
 ```
 
@@ -28,7 +28,7 @@ The default selector for form elements is `[data-form-element-type]`, note that 
 ### Form Element 'text' adapter example
 Form elements are implemented by adapters which extend the FormElement class.
 
-```
+```javascript
 $.FormValidator.addFormElement('text', {
 
 	/**
@@ -97,7 +97,7 @@ loadEvents | none | this | Apply events to your input elements, and call `this.v
 ## Validation method in depth
 The validation method is at the core of the `FormElement` adapter, every adapter should implement this method. To understand how this method should work, check out the e-mail example.
 
-```
+```javascript
 $.FormValidator.addFormElement('email', {
 	/**
 	 * @param {any} value - returned from getValue method above
@@ -121,7 +121,7 @@ $.FormValidator.addFormElement('email', {
 ### Building an error stack
 A powerful feature is the error stack, which is a list of tests the value should pass. These tests might be form validator methods, or custom functions/expression. The checkbox validation is as simple as:
 
-```
+```javascript
 validation: function (value) {
 	// value might be true/false
 	return [
@@ -136,7 +136,7 @@ The key of the tests such as `required` or `email` are error types which map to 
 
 Seperate from the form element adapters are validaiton tests, which could be used outside of the scope of form elements. These are simple functions returning a `boolean`, and accepting the value (or possibly more) as an argument. The inbuild validation method for a number is:
 
-```
+```javascript
 // ...
 number: function (value) {
 	return /^-?(?:\d+|\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test( value );
@@ -150,7 +150,7 @@ Inbuild support for: `required`, `length`, `email`, `number`
 
 Besides the the inbuild validation tests, it's easy to add additional tests by using the `addTest` method:
 
-```
+```javascript
 $.FormValidator.addTest("postalcodeNL", function(value, element) {
 	return this.optional(element) || /^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test(value);
 });

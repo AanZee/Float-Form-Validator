@@ -451,7 +451,7 @@
 		var errorStack = this.validation( this.getValue() );
 
 		// Turn map into array
-		var errors = this._checkErrors(errorStack);
+		var errors = this.errors = this._checkErrors(errorStack);
 
 		if (this.settings.debug) {
 			console.log('(FormElement.validate)(debug): options: ', options, ' errors: ', errors);

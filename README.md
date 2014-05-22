@@ -78,8 +78,8 @@ The default Form element class keeps a couple of guidelines to structure form el
 
 Property | Type | Description
 --- | --- | ---
-this.element | element | reference to the form element, not the input field
-this.$element | jQuery element | to the form element, not the input field
+this.element | element | Reference to the form element, not the input field. In addition, form elements are for now always rows `flt-form__row` and not the actual input field.
+this.$element | jQuery element | Reference to the form element (`flt-form__row`), not the input field
 this.$input | jQuery element | set by default to `this.$element.find('input')`
 this.$messageContainer | jQuery element | container in which to place messages such as errors
 
@@ -171,7 +171,3 @@ removeMessages | none | `this` | Clears the message container
 _checkErrors | errorStack `object` | errors {array} | Puts errors which are true and pushes them to an array. Be careful implementing this method.
 validate | options `object`, callback {function} | `this` | Main validate method which sets `this.isValid` state and valid/neutral/error state. Be careful implementing this method
 init | element `element`, options `object` | `this` | Constructor of the FormElement. Be careful implementing this method
-
-
-
-

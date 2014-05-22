@@ -4,16 +4,18 @@ Float Form Validator
 This plugin can be used to validate forms and is part of Aan Zee's [Float Frontend Library](https://github.com/AanZee/Float)
 
 ## Basic repo
-1. Clone or download the repo.
 
-2.Include all the script tags in your HTML
+Step 1. Clone or download the repo.
+
+Step 2. Include all the script tags in your HTML
 ```
 <script src="../js/form-validate.js"></script>
 <script src="../js/form-tests.js"></script>
 <script src="../js/form-element-types.js"></script>
 ```
 
-3. Call the Form validator on your form tag
+Step 3. Call the Form validator on your form tag
+
 ```
 $('.flt-form').formValidate();
 ```

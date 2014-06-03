@@ -169,9 +169,6 @@
 		 * @param {any} value - returned from getValue method above
 		 */
 		validation: function (value) {
-			// Support HTML5 properties
-			var minlength = this.$input.prop('minlength');
-			var maxlength = this.$input.prop('maxlength');
 
 			// Required and length
 			return [
@@ -207,7 +204,8 @@
 
 			// Required and length
 			return [
-				{ 'required': $.FormValidator.tests.required(value) }
+				{ 'required': $.FormValidator.tests.required(value) },
+				{ 'length': $.FormValidator.tests.length(value, minlength, maxlength) }
 			];
 		},
 

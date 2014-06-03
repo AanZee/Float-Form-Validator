@@ -12,11 +12,11 @@
 ;(function ( $, window, undefined) {
 
 
-	$.FormValidator.addTest("phoneNL", function(value, element) {
+	$.FormValidator.addTest('phoneNL', function(value) {
 		return /^((\+|00(\s|\s?\-\s?)?)31(\s|\s?\-\s?)?(\(0\)[\-\s]?)?|0)[1-9]((\s|\s?\-\s?)?[0-9]){8}$/.test(value);
 	});
 
-	$.FormValidator.addTest("postalcodeNL", function(value, element) {
+	$.FormValidator.addTest('postalcodeNL', function(value, element) {
 		return this.optional(element) || /^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test(value);
 	});
 

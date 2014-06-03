@@ -38,14 +38,14 @@
 	FormValidator.defaults = {
 		// A data selector is required
 		formElementDataSelector: '[data-form-element-type]',
-		rowClass: "form-row",
-		messagePlacementClass: "flt-form__mainbox",
+		rowClass: 'form-row',
+		messagePlacementClass: 'flt-form__mainbox',
 
 		// Used if the chosen message type is not supported
-		messageType: "note",
+		messageType: 'note',
 
 		// Used if the chosen error is not supported
-		errorType: "generic",
+		errorType: 'generic',
 
 		// Used to check if debug messages should be displayed
 		debug: false
@@ -56,10 +56,10 @@
 	FormValidator.formElements = {};
 
 	FormValidator.messages = {
-		generic: "An error occurred",
-		required: "This field is required",
-		email: "This is not a correct email address",
-		number: "This is not a correct number"
+		generic: 'An error occurred',
+		required: 'This field is required',
+		email: 'This is not a correct email address',
+		number: 'This is not a correct number'
 	};
 
 	FormValidator.containerTemplates = {
@@ -98,8 +98,8 @@
 		 * @return {bool}
 		 */
 		length: function (value, minlength, maxlength) {
-			if (typeof minlength === "number" && value.length < minlength) { return false; }
-			if (typeof maxlength === "number" && value.length > maxlength) { return false; }
+			if (typeof minlength === 'number' && value.length < minlength) { return false; }
+			if (typeof maxlength === 'number' && value.length > maxlength) { return false; }
 
 			return true;
 		},
@@ -141,18 +141,18 @@
 	 * Object.create polyfill
 	 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
 	 */
-	if (typeof Object.create != 'function') {
+	if (typeof Object.create !== 'function') {
 		(function () {
 			var F = function () {};
 				Object.create = function (o) {
 					if (arguments.length > 1) {
-						throw Error('Second argument not supported');
+						throw new Error('Second argument not supported');
 					}
 					if (o === null) {
-						throw Error('Cannot set a null [[Prototype]]');
+						throw new Error('Cannot set a null [[Prototype]]');
 					}
-					if (typeof o != 'object') {
-						throw TypeError('Argument must be an object');
+					if (typeof o !== 'object') {
+						throw new TypeError('Argument must be an object');
 					}
 					F.prototype = o;
 					return new F();
@@ -220,7 +220,7 @@
 	 * @return {string}
 	 */
 	FormValidator.createContainer = function (containerType) {
-		var containerTemplate = function() { return '' };
+		var containerTemplate = function() { return ''; };
 
 		// Get the container template with the containerType given
 		if ( this.containerTemplates.hasOwnProperty( containerType ) ) {
@@ -242,10 +242,10 @@
 		this.formElements = {};
 
 		// Add novalidate if HTML5
-		this.$form.attr( "novalidate", "novalidate" );
+		this.$form.attr( 'novalidate', 'novalidate' );
 
 		// Add aria rules for screen readers
-		this.$form.find("[required]").attr("aria-required", "true");
+		this.$form.find('[required]').attr('aria-required', 'true');
 
 		// Load all fields
 		this.$formElements = this.findElements();
@@ -293,14 +293,16 @@
 			_this.$formElements.formElement('validate', {
 				eventType: 'formSubmit'
 			}, function () {
-				if ( ! this.isValid) errors.push(this);
+				if ( ! this.isValid) { 
+					errors.push(this); 
+				}
 			});
 
 			_this.setIsProcessed(true);
 
 			if (errors.length > 0) {
 				// show top message
-				return false;
+				e.preventDefault();
 			}
 		});
 
@@ -352,8 +354,8 @@
 	function FormElement () {}
 
 	FormElement.defaults = {
-		rowErrorClass: "error",
-		rowValidClass: "valid",
+		rowErrorClass: 'error',
+		rowValidClass: 'valid',
 		messageContainerClass: 'messages'
 	};
 
@@ -454,7 +456,9 @@
 	FormElement.prototype._checkErrors = function (errorStack) {
 		return $.map(errorStack, function (obj) {
 			for (var key in obj) {
-				if ( ! obj[key]) return key;
+				if ( ! obj[key]) {
+					return key;
+				}
 			}
 		});
 	};
@@ -501,8 +505,6 @@
 	 *  @param {object} options - { eventType: string, placeErrorsWhenInvalid: array }
 	 */
 	FormElement.prototype.validate = function (options, callback) {
-		var _this = this;
-
 		// Get the error stack from the validation method
 		var errorStack = this.validation( this.getValue() );
 
@@ -542,7 +544,9 @@
 			this.setValidState();
 		}
 
-		if (callback && typeof callback === 'function') callback.apply(this);
+		if (callback && typeof callback === 'function') {
+			callback.apply(this);
+		}
 
 		return this;
 	};
@@ -574,7 +578,7 @@
 						if (typeof options === 'object' && options.debug) {
 							console.log('($.fn.formElement): FormElement type is supported "' + type + '"');
 						}
-						$.data( this, 'formElement', (new $.FormValidator.formElements[ type ]).init(this, options, validator) );
+						$.data( this, 'formElement', (new $.FormValidator.formElements[ type ]()).init(this, options, validator) );
 
 					} else {
 						if (typeof options === 'object' && options.debug) {

@@ -39,6 +39,7 @@
 		// A data selector is required
 		formElementDataSelector: '[data-form-element-type]',
 		rowClass: "flt-form__row",
+		messagePlacementClass: "flt-form__mainbox",
 
 		// Used if the chosen message type is not supported
 		messageType: "note",
@@ -46,6 +47,7 @@
 		// Used if the chosen error is not supported
 		errorType: "generic",
 
+		// Used to check if debug messages should be displayed
 		debug: false
 	};
 
@@ -58,6 +60,15 @@
 		required: "This field is required",
 		email: "This is not a correct email address",
 		number: "This is not a correct number"
+	};
+
+	FormValidator.containerTemplates = {
+		icons: function () {
+			return '<div class="flt-form__icon-holder"><i class="flt-form__icon-check"></i><i class="flt-form__icon-exclamation"></i></div>';
+		},
+		message: function () {
+			return '<div class="flt-form__messages"></div>';
+		}
 	};
 
 	FormValidator.messageTemplates = {
@@ -202,6 +213,24 @@
 		return messageTemplate( message );
 	};
 
+	/**
+	 * Static method
+	 * TODO: Shouldn't be static because uses the defaults
+	 * @param {string} errorType
+	 * @param {string} messageType
+	 * @return {string}
+	 */
+	FormValidator.createContainer = function (containerType) {
+		var containerTemplate = function() { return '' };
+
+		// Get the container template with the containerType given
+		if ( this.containerTemplates.hasOwnProperty( containerType ) ) {
+			containerTemplate = this.containerTemplates[ containerType ];
+		}
+
+		return containerTemplate();
+	};
+
 	// http://jqueryvalidation.org/jQuery.validator.setDefaults/
 	FormValidator.setDefaults = function( settings ) {
 		$.extend( FormValidator.defaults, settings );
@@ -242,7 +271,9 @@
 
 		// Form submit
 		this.$form.on('submit', function (e) {
-			console.log('(FormValidator.loadEvents): form submit', _this);
+			if(_this.settings.debug) {
+				console.log('(FormValidator.loadEvents): form submit', _this);
+			}
 
 			if (_this.settings.debug && window.console) {
 				console.info('Validating form: ', _this.$form);
@@ -356,8 +387,17 @@
 	};
 
 	FormElement.prototype.initMessages = function () {
+		var $messagePlacement = this.$element;
+
+		// Check if a message placement class has been set and if an child element with that class can be found
+		if( this.settings.messagePlacementClass !== '' && this.$element.find('.' + this.settings.messagePlacementClass).length )  {
+			// If so, use that element to place the message container in
+			$messagePlacement = this.$element.find('.' + this.settings.messagePlacementClass);
+		} 
+
 		// Get the message container
-		this.$messageContainer = this.$element.find('.' + this.settings.messageContainerClass);
+		this.$iconContainer = $(FormValidator.createContainer('icons')).appendTo( $messagePlacement );
+		this.$messageContainer = $(FormValidator.createContainer('message')).appendTo( $messagePlacement );
 
 		return this;
 	};

@@ -44,7 +44,9 @@
 		messageType: "note",
 
 		// Used if the chosen error is not supported
-		errorType: "generic"
+		errorType: "generic",
+
+		debug: false
 	};
 
 	// Static holder of formElements, might be better private
@@ -229,7 +231,7 @@
 	 * Init all form elements
 	 */
 	FormValidator.prototype.findElements = function() {
-		return this.$form.find( this.settings.formElementDataSelector).formElement();
+		return this.$form.find( this.settings.formElementDataSelector ).formElement(this.settings);
 	};
 
 	/**
@@ -309,7 +311,6 @@
 	function FormElement () {}
 
 	FormElement.defaults = {
-		debug: false,
 		rowErrorClass: "flt-form__row-error",
 		rowValidClass: "flt-form__row-valid",
 		messageContainerClass: 'flt-form__messages'
@@ -514,11 +515,15 @@
 
 					if ( $.FormValidator.isFormElementSupported( type ) ) {
 						// Create the desired form element if supported
-						console.log('($.fn.formElement): FormElement type is supported "' + type + '"');
+						if (typeof options === 'object' && options.debug) {
+							console.log('($.fn.formElement): FormElement type is supported "' + type + '"');
+						}
 						$.data( this, 'formElement', (new $.FormValidator.formElements[ type ]).init(this, options) );
 
 					} else {
-						console.error('($.fn.formElement): FormElement type "' + type + '" is not supported default FormElement used');
+						if (typeof options === 'object' && options.debug) {
+							console.error('($.fn.formElement): FormElement type "' + type + '" is not supported default FormElement used');
+						}
 						$.data( this, 'formElement', new FormElement().init(this, options) );
 					}
 

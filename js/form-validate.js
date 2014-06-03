@@ -38,7 +38,7 @@
 	FormValidator.defaults = {
 		// A data selector is required
 		formElementDataSelector: '[data-form-element-type]',
-		rowClass: "flt-form__row",
+		rowClass: "form-row",
 		messagePlacementClass: "flt-form__mainbox",
 
 		// Used if the chosen message type is not supported
@@ -64,19 +64,19 @@
 
 	FormValidator.containerTemplates = {
 		icons: function () {
-			return '<div class="flt-form__icon-holder"><i class="flt-form__icon-check"></i><i class="flt-form__icon-exclamation"></i></div>';
+			return '<div class="icon-holder"><i class="icon-check"></i><i class="icon-exclamation"></i></div>';
 		},
 		message: function () {
-			return '<div class="flt-form__messages"></div>';
+			return '<div class="messages"></div>';
 		}
 	};
 
 	FormValidator.messageTemplates = {
 		note: function (text) {
-			return '<p class="flt-form__message-note">' + text + '</p>';
+			return '<p class="message message-note">' + text + '</p>';
 		},
 		error: function (text) {
-			return '<p class="flt-form__message-error">' + text + '</p>';
+			return '<p class="message message-error">' + text + '</p>';
 		}
 	};
 
@@ -231,7 +231,6 @@
 		return containerTemplate();
 	};
 
-	// http://jqueryvalidation.org/jQuery.validator.setDefaults/
 	FormValidator.setDefaults = function( settings ) {
 		$.extend( FormValidator.defaults, settings );
 	};
@@ -254,13 +253,23 @@
 
 		// Load events
 		this.loadEvents();
+
+		this.setIsProcessed(false);
 	};
 
 	/**
 	 * Init all form elements
 	 */
 	FormValidator.prototype.findElements = function() {
-		return this.$form.find( this.settings.formElementDataSelector ).formElement(this.settings);
+		return this.$form.find( this.settings.formElementDataSelector ).formElement(this.settings, this);
+	};
+
+	FormValidator.prototype.setIsProcessed = function( isProcessed ) {
+		this.isProcessed = isProcessed;
+	};
+
+	FormValidator.prototype.getIsProcessed = function() {
+		return this.isProcessed;
 	};
 
 	/**
@@ -287,6 +296,7 @@
 			}, function () {
 				if ( ! this.isValid) errors.push(this);
 			});
+			_this.setIsProcessed(true);
 
 			if (errors.length > 0) {
 				// show top message
@@ -342,9 +352,9 @@
 	function FormElement () {}
 
 	FormElement.defaults = {
-		rowErrorClass: "flt-form__row-error",
-		rowValidClass: "flt-form__row-valid",
-		messageContainerClass: 'flt-form__messages'
+		rowErrorClass: "error",
+		rowValidClass: "valid",
+		messageContainerClass: 'messages'
 	};
 
 	/**
@@ -352,10 +362,13 @@
 	 * @param {object} options - An option map
 	 * @return this
 	 */
-	FormElement.prototype.init = function (element, options) {
+	FormElement.prototype.init = function (element, options, validator) {
 		// Save both references to the element
 		this.element = element;
 		this.$element = $(element);
+
+		// Define the validator that has loaded this element
+		this.validator = validator;
 
 		// Extend the defaults with the passed options and the Form
 		this.settings = $.extend( true, {}, FormElement.defaults, options);
@@ -505,7 +518,8 @@
 			// There are errors, neutralize first
 			this.setNeutralState();
 
-			if ($.inArray(errors[0], options.placeErrorsWhenInvalid) > -1 || options.eventType === 'formSubmit' ) {
+			// Decide if the error should be showed
+			if ((this.validator.getIsProcessed() && $.inArray(errors[0], options.placeErrorsWhenInvalid) > -1) || options.eventType === 'formSubmit' ) {
 				// Place the error only when the first error in the stack triggers the error
 
 				if (this.settings.debug) {
@@ -537,7 +551,7 @@
 	 * Instead of always returning the FormElement, the subclass such
 	 * as text/email is created if the type is available
 	 */
-	$.fn.formElement = function (options) {
+	$.fn.formElement = function (options, validator) {
 		var args = arguments;
 		// Check the type of the options var
 		if (options === undefined || typeof options === 'object') {
@@ -558,13 +572,13 @@
 						if (typeof options === 'object' && options.debug) {
 							console.log('($.fn.formElement): FormElement type is supported "' + type + '"');
 						}
-						$.data( this, 'formElement', (new $.FormValidator.formElements[ type ]).init(this, options) );
+						$.data( this, 'formElement', (new $.FormValidator.formElements[ type ]).init(this, options, validator) );
 
 					} else {
 						if (typeof options === 'object' && options.debug) {
 							console.error('($.fn.formElement): FormElement type "' + type + '" is not supported default FormElement used');
 						}
-						$.data( this, 'formElement', new FormElement().init(this, options) );
+						$.data( this, 'formElement', new FormElement().init(this, options, validator) );
 					}
 
 				}

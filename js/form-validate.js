@@ -309,7 +309,7 @@
 	function FormElement () {}
 
 	FormElement.defaults = {
-		debug: true,
+		debug: false,
 		rowErrorClass: "flt-form__row-error",
 		rowValidClass: "flt-form__row-valid",
 		messageContainerClass: 'flt-form__messages'

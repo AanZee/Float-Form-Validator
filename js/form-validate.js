@@ -206,7 +206,6 @@
 		if ( this.messages.hasOwnProperty( errorType ) ) {
 			message = this.messages[ errorType ];
 		} else {
-			console.log(this.messages, this.defaults.errorType);
 			message = this.messages[ this.defaults.errorType ];
 		}
 
@@ -296,6 +295,7 @@
 			}, function () {
 				if ( ! this.isValid) errors.push(this);
 			});
+
 			_this.setIsProcessed(true);
 
 			if (errors.length > 0) {
@@ -491,7 +491,9 @@
 	};
 
 	FormElement.prototype.loadEvents = function () {
-		console.log('(FormElement.prototype.loadEvents): not implemented by the adapter');
+		if(this.settings.debug) {
+			console.log('(FormElement.prototype.loadEvents): not implemented by the adapter');
+		}
 		return this;
 	};
 

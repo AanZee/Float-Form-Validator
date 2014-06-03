@@ -47,10 +47,6 @@
 		loadEvents: function () {
 			var _this = this;
 
-			this.$input.on('keydown', function () {
-				if ( ! _this.isValid) _this.setNeutralState();
-			});
-
 			this.$input.on('change keyup', function () {
 				_this.validate({
 					eventType: 'change',

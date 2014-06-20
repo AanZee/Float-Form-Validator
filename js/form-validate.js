@@ -308,13 +308,8 @@
 			_this.$formElements.formElement('validate', {
 				eventType: 'formSubmit'
 			}, function () {
-<<<<<<< HEAD
 				if ( ! this.isValid) {
 					errors.push(this);
-=======
-				if ( ! this.isValid) { 
-					errors.push(this); 
->>>>>>> FETCH_HEAD
 				}
 			});
 
@@ -428,11 +423,7 @@
 		if( this.settings.messagePlacementClass !== '' && this.$element.find('.' + this.settings.messagePlacementClass).length )  {
 			// If so, use that element to place the message container in
 			$messagePlacement = this.$element.find('.' + this.settings.messagePlacementClass);
-<<<<<<< HEAD
 		}
-=======
-		} 
->>>>>>> FETCH_HEAD
 
 		// Get the message container
 		this.$iconContainer = $(FormValidator.createContainer('icons')).appendTo( $messagePlacement );
@@ -550,15 +541,9 @@
 			// There are errors, neutralize first
 			this.setNeutralState();
 
-<<<<<<< HEAD
-			console.log(this);
 			// Decide if the error should be showed
 			if (options.placeErrorsWhenInvalid && (this.validator.getIsProcessed() && $.inArray(errors[0], options.placeErrorsWhenInvalid) > -1)
 				|| (options.eventType === 'formSubmit' && this.formSubmitSettings && $.inArray(errors[0], this.formSubmitSettings.placeErrorsWhenInvalid)) ) {
-=======
-			// Decide if the error should be showed
-			if ((this.validator.getIsProcessed() && $.inArray(errors[0], options.placeErrorsWhenInvalid) > -1) || options.eventType === 'formSubmit' ) {
->>>>>>> FETCH_HEAD
 				// Place the error only when the first error in the stack triggers the error
 
 				if (this.settings.debug) {

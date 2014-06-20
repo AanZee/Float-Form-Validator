@@ -38,13 +38,17 @@
 	FormValidator.defaults = {
 		// A data selector is required
 		formElementDataSelector: '[data-form-element-type]',
-		rowClass: "flt-form__row",
+		rowClass: 'form-row',
+		messagePlacementClass: 'flt-form__mainbox',
 
 		// Used if the chosen message type is not supported
-		messageType: "note",
+		messageType: 'note',
 
 		// Used if the chosen error is not supported
-		errorType: "generic"
+		errorType: 'generic',
+
+		// Used to check if debug messages should be displayed
+		debug: false
 	};
 
 	// Static holder of formElements, might be better private
@@ -52,18 +56,27 @@
 	FormValidator.formElements = {};
 
 	FormValidator.messages = {
-		generic: "An error occurred",
-		required: "This field is required",
-		email: "This is not a correct email address",
-		number: "This is not a correct number"
+		generic: 'An error occurred',
+		required: 'This field is required',
+		email: 'This is not a correct email address',
+		number: 'This is not a correct number'
+	};
+
+	FormValidator.containerTemplates = {
+		icons: function () {
+			return '<div class="icon-holder"><i class="icon-check"></i><i class="icon-exclamation"></i></div>';
+		},
+		message: function () {
+			return '<div class="messages"></div>';
+		}
 	};
 
 	FormValidator.messageTemplates = {
 		note: function (text) {
-			return '<p class="flt-form__message-note">' + text + '</p>';
+			return '<p class="message message-note">' + text + '</p>';
 		},
 		error: function (text) {
-			return '<p class="flt-form__message-error">' + text + '</p>';
+			return '<p class="message message-error">' + text + '</p>';
 		}
 	};
 
@@ -85,8 +98,8 @@
 		 * @return {bool}
 		 */
 		length: function (value, minlength, maxlength) {
-			if (typeof minlength === "number" && value.length < minlength) { return false; }
-			if (typeof maxlength === "number" && value.length > maxlength) { return false; }
+			if (typeof minlength === 'number' && value.length < minlength) { return false; }
+			if (typeof maxlength === 'number' && value.length > maxlength) { return false; }
 
 			return true;
 		},
@@ -117,6 +130,20 @@
 
 	/**
 	 * Static method
+	 * add validation method
+	 * @param {string} type
+	 * @param {string} message
+	 */
+	FormValidator.addMessage = function (type, message) {
+		if (this.messages[type]) {
+			throw new Error('(FormValidator.addMessage): message with type "' + type + '" is already registered as a message');
+		} else {
+			this.messages[type] = message;
+		}
+	};
+
+	/**
+	 * Static method
 	 * @param {string} type - text,email etc.
 	 * @return {bool} is FormElement supported?
 	 */
@@ -128,18 +155,18 @@
 	 * Object.create polyfill
 	 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
 	 */
-	if (typeof Object.create != 'function') {
+	if (typeof Object.create !== 'function') {
 		(function () {
 			var F = function () {};
 				Object.create = function (o) {
 					if (arguments.length > 1) {
-						throw Error('Second argument not supported');
+						throw new Error('Second argument not supported');
 					}
 					if (o === null) {
-						throw Error('Cannot set a null [[Prototype]]');
+						throw new Error('Cannot set a null [[Prototype]]');
 					}
-					if (typeof o != 'object') {
-						throw TypeError('Argument must be an object');
+					if (typeof o !== 'object') {
+						throw new TypeError('Argument must be an object');
 					}
 					F.prototype = o;
 					return new F();
@@ -193,14 +220,30 @@
 		if ( this.messages.hasOwnProperty( errorType ) ) {
 			message = this.messages[ errorType ];
 		} else {
-			console.log(this.messages, this.defaults.errorType);
 			message = this.messages[ this.defaults.errorType ];
 		}
 
 		return messageTemplate( message );
 	};
 
-	// http://jqueryvalidation.org/jQuery.validator.setDefaults/
+	/**
+	 * Static method
+	 * TODO: Shouldn't be static because uses the defaults
+	 * @param {string} errorType
+	 * @param {string} messageType
+	 * @return {string}
+	 */
+	FormValidator.createContainer = function (containerType) {
+		var containerTemplate = function() { return ''; };
+
+		// Get the container template with the containerType given
+		if ( this.containerTemplates.hasOwnProperty( containerType ) ) {
+			containerTemplate = this.containerTemplates[ containerType ];
+		}
+
+		return containerTemplate();
+	};
+
 	FormValidator.setDefaults = function( settings ) {
 		$.extend( FormValidator.defaults, settings );
 	};
@@ -213,23 +256,33 @@
 		this.formElements = {};
 
 		// Add novalidate if HTML5
-		this.$form.attr( "novalidate", "novalidate" );
+		this.$form.attr( 'novalidate', 'novalidate' );
 
 		// Add aria rules for screen readers
-		this.$form.find("[required]").attr("aria-required", "true");
+		this.$form.find('[required]').attr('aria-required', 'true');
 
 		// Load all fields
 		this.$formElements = this.findElements();
 
 		// Load events
 		this.loadEvents();
+
+		this.setIsProcessed(false);
 	};
 
 	/**
 	 * Init all form elements
 	 */
 	FormValidator.prototype.findElements = function() {
-		return this.$form.find( this.settings.formElementDataSelector).formElement();
+		return this.$form.find( this.settings.formElementDataSelector ).formElement(this.settings, this);
+	};
+
+	FormValidator.prototype.setIsProcessed = function( isProcessed ) {
+		this.isProcessed = isProcessed;
+	};
+
+	FormValidator.prototype.getIsProcessed = function() {
+		return this.isProcessed;
 	};
 
 	/**
@@ -240,7 +293,9 @@
 
 		// Form submit
 		this.$form.on('submit', function (e) {
-			console.log('(FormValidator.loadEvents): form submit', _this);
+			if(_this.settings.debug) {
+				console.log('(FormValidator.loadEvents): form submit', _this);
+			}
 
 			if (_this.settings.debug && window.console) {
 				console.info('Validating form: ', _this.$form);
@@ -248,16 +303,21 @@
 
 			var errors = [];
 
+
 			// Fire the validate method on our form elements
 			_this.$formElements.formElement('validate', {
 				eventType: 'formSubmit'
 			}, function () {
-				if ( ! this.isValid) errors.push(this);
+				if ( ! this.isValid) {
+					errors.push(this);
+				}
 			});
+
+			_this.setIsProcessed(true);
 
 			if (errors.length > 0) {
 				// show top message
-				return false;
+				e.preventDefault();
 			}
 		});
 
@@ -309,10 +369,9 @@
 	function FormElement () {}
 
 	FormElement.defaults = {
-		debug: true,
-		rowErrorClass: "flt-form__row-error",
-		rowValidClass: "flt-form__row-valid",
-		messageContainerClass: 'flt-form__messages'
+		rowErrorClass: 'error',
+		rowValidClass: 'valid',
+		messageContainerClass: 'messages'
 	};
 
 	/**
@@ -320,10 +379,13 @@
 	 * @param {object} options - An option map
 	 * @return this
 	 */
-	FormElement.prototype.init = function (element, options) {
+	FormElement.prototype.init = function (element, options, validator) {
 		// Save both references to the element
 		this.element = element;
 		this.$element = $(element);
+
+		// Define the validator that has loaded this element
+		this.validator = validator;
 
 		// Extend the defaults with the passed options and the Form
 		this.settings = $.extend( true, {}, FormElement.defaults, options);
@@ -355,8 +417,17 @@
 	};
 
 	FormElement.prototype.initMessages = function () {
+		var $messagePlacement = this.$element;
+
+		// Check if a message placement class has been set and if an child element with that class can be found
+		if( this.settings.messagePlacementClass !== '' && this.$element.find('.' + this.settings.messagePlacementClass).length )  {
+			// If so, use that element to place the message container in
+			$messagePlacement = this.$element.find('.' + this.settings.messagePlacementClass);
+		}
+
 		// Get the message container
-		this.$messageContainer = this.$element.find('.' + this.settings.messageContainerClass);
+		this.$iconContainer = $(FormValidator.createContainer('icons')).appendTo( $messagePlacement );
+		this.$messageContainer = $(FormValidator.createContainer('message')).appendTo( $messagePlacement );
 
 		return this;
 	};
@@ -372,13 +443,17 @@
 	 * @param {string} errorType - required etc.
 	 */
 	FormElement.prototype.placeError = function (errorType) {
-		return this.placeMessage( FormValidator.createMessage(errorType, 'error') );
+		return this.placeMessage( FormValidator.createMessage(errorType, 'error'), 'error');
 	};
+
+	FormElement.prototype.placeNote = function (errorType) {
+		return this.placeMessage( FormValidator.createMessage(errorType, 'note'), 'note');
+	}
 
 	/**
 	 * @param {string} message - html of the message
 	 */
-	FormElement.prototype.placeMessage = function (message) {
+	FormElement.prototype.placeMessage = function (message, messageType) {
 		if (this.settings.debug) {
 			console.log('(FormElement.placeMessage)(debug): ' + message);
 		}
@@ -400,7 +475,9 @@
 	FormElement.prototype._checkErrors = function (errorStack) {
 		return $.map(errorStack, function (obj) {
 			for (var key in obj) {
-				if ( ! obj[key]) return key;
+				if ( ! obj[key]) {
+					return key;
+				}
 			}
 		});
 	};
@@ -437,7 +514,9 @@
 	};
 
 	FormElement.prototype.loadEvents = function () {
-		console.log('(FormElement.prototype.loadEvents): not implemented by the adapter');
+		if(this.settings.debug) {
+			console.log('(FormElement.prototype.loadEvents): not implemented by the adapter');
+		}
 		return this;
 	};
 
@@ -445,8 +524,6 @@
 	 *  @param {object} options - { eventType: string, placeErrorsWhenInvalid: array }
 	 */
 	FormElement.prototype.validate = function (options, callback) {
-		var _this = this;
-
 		// Get the error stack from the validation method
 		var errorStack = this.validation( this.getValue() );
 
@@ -464,7 +541,10 @@
 			// There are errors, neutralize first
 			this.setNeutralState();
 
-			if ($.inArray(errors[0], options.placeErrorsWhenInvalid) > -1 || options.eventType === 'formSubmit' ) {
+			console.log(this);
+			// Decide if the error should be showed
+			if (options.placeErrorsWhenInvalid && (this.validator.getIsProcessed() && $.inArray(errors[0], options.placeErrorsWhenInvalid) > -1)
+				|| (options.eventType === 'formSubmit' && this.formSubmitSettings && $.inArray(errors[0], this.formSubmitSettings.placeErrorsWhenInvalid)) ) {
 				// Place the error only when the first error in the stack triggers the error
 
 				if (this.settings.debug) {
@@ -477,6 +557,20 @@
 				this.placeError( errors[0] );
 			}
 
+			// Decide a note should be showed
+
+			if ((options.placeNoteWhenInvalid && $.inArray(errors[0], options.placeNoteWhenInvalid) > -1) || ( options.eventType === 'formSubmit' && this.formSubmitSettings && $.inArray(errors[0], this.formSubmitSettings.placeNoteWhenInvalid) ) ) {
+				console.log(options.placeNoteWhenInvalid);
+				// Place the note only when the first error in the stack triggers the error
+
+				if (this.settings.debug) {
+					console.log('(FormElement.validate)(debug): Place note because errors[0] "' + errors[0] + '" is in options.placeNoteWhenInvalid: ', options.placeNoteWhenInvalid);
+				}
+
+				// Place only the most relevant error, first on the stack
+				this.placeNote( errors[0] );
+			}
+
 		} else {
 			// Change state only on validate
 			this.isValid = true;
@@ -485,7 +579,9 @@
 			this.setValidState();
 		}
 
-		if (callback && typeof callback === 'function') callback.apply(this);
+		if (callback && typeof callback === 'function') {
+			callback.apply(this);
+		}
 
 		return this;
 	};
@@ -496,7 +592,7 @@
 	 * Instead of always returning the FormElement, the subclass such
 	 * as text/email is created if the type is available
 	 */
-	$.fn.formElement = function (options) {
+	$.fn.formElement = function (options, validator) {
 		var args = arguments;
 		// Check the type of the options var
 		if (options === undefined || typeof options === 'object') {
@@ -514,12 +610,16 @@
 
 					if ( $.FormValidator.isFormElementSupported( type ) ) {
 						// Create the desired form element if supported
-						console.log('($.fn.formElement): FormElement type is supported "' + type + '"');
-						$.data( this, 'formElement', (new $.FormValidator.formElements[ type ]).init(this, options) );
+						if (typeof options === 'object' && options.debug) {
+							console.log('($.fn.formElement): FormElement type is supported "' + type + '"');
+						}
+						$.data( this, 'formElement', (new $.FormValidator.formElements[ type ]()).init(this, options, validator) );
 
 					} else {
-						console.error('($.fn.formElement): FormElement type "' + type + '" is not supported default FormElement used');
-						$.data( this, 'formElement', new FormElement().init(this, options) );
+						if (typeof options === 'object' && options.debug) {
+							console.error('($.fn.formElement): FormElement type "' + type + '" is not supported default FormElement used');
+						}
+						$.data( this, 'formElement', new FormElement().init(this, options, validator) );
 					}
 
 				}

@@ -559,7 +559,7 @@
 			// Decide a note should be showed
 
 			if ((options.placeNoteWhenInvalid && $.inArray(errors[0], options.placeNoteWhenInvalid) > -1) || ( options.eventType === 'formSubmit' && this.formSubmitSettings && $.inArray(errors[0], this.formSubmitSettings.placeNoteWhenInvalid) ) ) {
-				console.log(options.placeNoteWhenInvalid);
+				// console.log(options.placeNoteWhenInvalid);
 				// Place the note only when the first error in the stack triggers the error
 
 				if (this.settings.debug) {

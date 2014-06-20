@@ -47,13 +47,10 @@
 		loadEvents: function () {
 			var _this = this;
 
-			this.$input.on('keydown', function () {
-				if ( ! _this.isValid) _this.setNeutralState();
-			});
-
-			this.$input.on('change', function () {
+			this.$input.on('change keyup', function () {
 				_this.validate({
-					eventType: 'change'
+					eventType: 'change',
+					placeErrorsWhenInvalid: ['required', 'length']
 				});
 			});
 		}
@@ -88,13 +85,10 @@
 		loadEvents: function () {
 			var _this = this;
 
-			this.$input.on('keydown', function () {
-				if ( ! _this.isValid) _this.setNeutralState();
-			});
-
-			this.$input.on('change', function () {
+			this.$input.on('change keyup', function () {
 				_this.validate({
-					eventType: 'change'
+					eventType: 'change',
+					placeErrorsWhenInvalid: ['required', 'length', 'number']
 				});
 			});
 		}
@@ -124,7 +118,8 @@
 
 			this.$input.on('change', function () {
 				_this.validate({
-					eventType: 'change'
+					eventType: 'change',
+					placeErrorsWhenInvalid: ['required']
 				});
 			});
 		}
@@ -157,7 +152,8 @@
 
 			this.$input.on('change', function () {
 				_this.validate({
-					eventType: 'change'
+					eventType: 'change',
+					placeErrorsWhenInvalid: ['required']
 				});
 			});
 		}
@@ -173,9 +169,6 @@
 		 * @param {any} value - returned from getValue method above
 		 */
 		validation: function (value) {
-			// Support HTML5 properties
-			var minlength = this.$input.prop('minlength');
-			var maxlength = this.$input.prop('maxlength');
 
 			// Required and length
 			return [
@@ -187,13 +180,10 @@
 		loadEvents: function () {
 			var _this = this;
 
-			this.$input.on('keydown', function () {
-				if ( ! _this.isValid) _this.setNeutralState();
-			});
-
-			this.$input.on('change', function () {
+			this.$input.on('change keyup', function () {
 				_this.validate({
-					eventType: 'change'
+					eventType: 'change',
+					placeErrorsWhenInvalid: ['required', 'email']
 				});
 			});
 		}
@@ -214,20 +204,18 @@
 
 			// Required and length
 			return [
-				{ 'required': $.FormValidator.tests.required(value) }
+				{ 'required': $.FormValidator.tests.required(value) },
+				{ 'length': $.FormValidator.tests.length(value, minlength, maxlength) }
 			];
 		},
 
 		loadEvents: function () {
 			var _this = this;
 
-			this.$input.on('keydown', function () {
-				if ( ! _this.isValid) _this.setNeutralState();
-			});
-
-			this.$input.on('change', function () {
+			this.$input.on('change keyup', function () {
 				_this.validate({
-					eventType: 'change'
+					eventType: 'change',
+					placeErrorsWhenInvalid: ['required']
 				});
 			});
 		}

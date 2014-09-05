@@ -39,7 +39,7 @@
 		// A data selector is required
 		formElementDataSelector: '[data-form-element-type]',
 		rowClass: 'form-row',
-		messagePlacementClass: 'flt-form__mainbox',
+		messagePlacementClass: 'form--mainbox',
 
 		// Used if the chosen message type is not supported
 		messageType: 'note',

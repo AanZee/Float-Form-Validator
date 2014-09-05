@@ -17,13 +17,13 @@ Step 2. Include all the script tags in your HTML
 Step 3. Call the Form validator on your form tag
 
 ```javascript
-$('.flt-form').formValidate();
+$('.form').formValidate();
 ```
 
 ## Form elements
 At the core of the validator are form elements, small components in JS which explain the behaviour of input fields, but not limited to input elements alone. The `FormValidator` finds all the form elements within a form. Form elements can be found in `js/form-element-types.js`.
 
-The default selector for form elements is `[data-form-element-type]`, note that without this selector the `FormValidator` class does nothing to validate your input fiels. In addition, form elements are for now always rows `flt-form__row` and not the actual input field. An advantage of this is the fact you don't necessarily have to use input fields. Another advantage is that within a form element, more than just an input field can be managed such as error messages and classnames.
+The default selector for form elements is `[data-form-element-type]`, note that without this selector the `FormValidator` class does nothing to validate your input fiels. In addition, form elements are for now always rows `form--row` and not the actual input field. An advantage of this is the fact you don't necessarily have to use input fields. Another advantage is that within a form element, more than just an input field can be managed such as error messages and classnames.
 
 ### Form Element 'text' adapter example
 Form elements are implemented by adapters which extend the FormElement class.
@@ -78,8 +78,8 @@ The default Form element class keeps a couple of guidelines to structure form el
 
 Property | Type | Description
 --- | --- | ---
-this.element | element | Reference to the form element, not the input field. In addition, form elements are for now always rows `flt-form__row` and not the actual input field.
-this.$element | jQuery element | Reference to the form element (`flt-form__row`), not the input field
+this.element | element | Reference to the form element, not the input field. In addition, form elements are for now always rows `form--row` and not the actual input field.
+this.$element | jQuery element | Reference to the form element (`form--row`), not the input field
 this.$input | jQuery element | set by default to `this.$element.find('input')`
 this.$messageContainer | jQuery element | container in which to place messages such as errors
 

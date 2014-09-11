@@ -173,9 +173,9 @@ a {
 
 .form--row {
   padding: 7px 0; }
-  .form--row > .form--messages .form--message-error {
+  .form--row > .messages .message-error {
     position: relative; }
-    .form--row > .form--messages .form--message-error:before {
+    .form--row > .messages .message-error:before {
       width: 0;
       height: 0;
       border-left: 8px solid transparent;
@@ -188,7 +188,7 @@ a {
       margin-left: -8px;
       bottom: -7px;
       z-index: 2; }
-    .form--row > .form--messages .form--message-error:after {
+    .form--row > .messages .message-error:after {
       width: 0;
       height: 0;
       border-left: 8px solid transparent;
@@ -207,9 +207,9 @@ a {
     content: "";
     display: table;
     clear: both; }
-  .form--mainbox .form--message-error {
+  .form--mainbox .message-error {
     position: relative; }
-    .form--mainbox .form--message-error:before {
+    .form--mainbox .message-error:before {
       width: 0;
       height: 0;
       border-left: 8px solid transparent;
@@ -222,7 +222,7 @@ a {
       margin-left: -8px;
       top: -7px;
       z-index: 2; }
-    .form--mainbox .form--message-error:after {
+    .form--mainbox .message-error:after {
       width: 0;
       height: 0;
       border-left: 8px solid transparent;
@@ -240,8 +240,8 @@ a {
   display: table;
   clear: both; }
 
-.form--icon-holder .form--icon-check,
-.form--icon-holder .form--icon-exclamation {
+.icon-holder .icon-check,
+.icon-holder .icon-exclamation {
   width: 18px;
   height: 18px;
   line-height: 16px;
@@ -254,9 +254,9 @@ a {
   top: 14px;
   border: 2px solid #fdf6e3;
   display: none; }
-.form--icon-holder .form--icon-check {
+.icon-holder .icon-check {
   background-color: #859900; }
-.form--icon-holder .form--icon-exclamation {
+.icon-holder .icon-exclamation {
   background-color: #dc322f; }
 
 .form--input {
@@ -292,6 +292,23 @@ a {
   position: absolute;
   opacity: 0;
   z-index: -1; }
+
+[class^="icon-"], [class*=" icon-"] {
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-check:before {
+  content: "\2713"; }
+
+.icon-exclamation:before {
+  content: "!"; }
 
 .form--input-select {
   -webkit-appearance: none;
@@ -448,39 +465,39 @@ a {
 .form--label-checkbox .form--input-indicator {
   border-radius: 3px;
   font-size: 12px; }
-  .form--label-checkbox .form--input-indicator .form--icon-check {
+  .form--label-checkbox .form--input-indicator .icon-check {
     line-height: 16px; }
 
-.form--row-error .form--label {
+.is-error .form--label {
   color: #dc322f; }
-.form--row-error .form--label-radio,
-.form--row-error .form--label-checkbox {
+.is-error .form--label-radio,
+.is-error .form--label-checkbox {
   background-color: rgba(220, 50, 47, 0.15);
   padding-left: 36px; }
-  .form--row-error .form--label-radio:first-child,
-  .form--row-error .form--label-checkbox:first-child {
+  .is-error .form--label-radio:first-child,
+  .is-error .form--label-checkbox:first-child {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px; }
-  .form--row-error .form--label-radio:last-child,
-  .form--row-error .form--label-checkbox:last-child {
+  .is-error .form--label-radio:last-child,
+  .is-error .form--label-checkbox:last-child {
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px; }
-  .form--row-error .form--label-radio .form--input-indicator,
-  .form--row-error .form--label-checkbox .form--input-indicator {
+  .is-error .form--label-radio .form--input-indicator,
+  .is-error .form--label-checkbox .form--input-indicator {
     left: 11px; }
-.form--row-error .form--input-validate.form--input {
+.is-error .form--input-validate.form--input {
   box-shadow: 0 0 0 1px #dc322f, inset 0 1px 2px rgba(0, 0, 0, 0.15); }
-  .form--row-error .form--input-validate.form--input:focus {
+  .is-error .form--input-validate.form--input:focus {
     box-shadow: 0 0 0 2px #dc322f, inset 0 1px 2px rgba(0, 0, 0, 0.15); }
-.form--row-error .form--icon-holder .form--icon-exclamation {
+.is-error .icon-holder .icon-exclamation {
   display: block; }
 
-.form--messages:after {
+.messages:after {
   content: "";
   display: table;
   clear: both; }
 
-.form--message-error {
+.message-error {
   float: left;
   background-color: white;
   color: #073642;
@@ -492,14 +509,14 @@ a {
   box-shadow: 0 0 0 1px #aaaaaa;
   margin: 6px 0; }
 
-.form--row-valid .form--icon-holder .form--icon-check {
+.is-valid .icon-holder .icon-check {
   display: block; }
-.form--row-valid .form--label-required:after {
+.is-valid .form--label-required:after {
   content: '*';
   color: #859900; }
-.form--row-valid .form--input-validate.form--input {
+.is-valid .form--input-validate.form--input {
   box-shadow: 0 0 0 1px #859900, inset 0 1px 2px rgba(0, 0, 0, 0.15); }
-  .form--row-valid .form--input-validate.form--input:focus {
+  .is-valid .form--input-validate.form--input:focus {
     box-shadow: 0 0 0 2px #859900, inset 0 1px 2px rgba(0, 0, 0, 0.15); }
 
 .form--description {
@@ -576,7 +593,7 @@ a {
     content: "";
     display: table;
     clear: both; }
-  .form--row > .form--messages {
+  .form--row > .messages {
     margin-left: 200px; }
 
   .form--subbox {
@@ -638,7 +655,7 @@ a {
     content: "";
     display: table;
     clear: both; }
-  .form--row > .form--messages {
+  .form--row > .messages {
     margin-left: 200px; }
 
   .form--subbox {

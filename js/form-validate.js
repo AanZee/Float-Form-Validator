@@ -29,6 +29,8 @@
 		this.formElements = [];
 
 		// Run the initializer
+
+
 		this.init();
 	}
 
@@ -38,7 +40,7 @@
 	FormValidator.defaults = {
 		// A data selector is required
 		formElementDataSelector: '[data-form-element-type]',
-		rowClass: 'form-row',
+		rowClass: 'form--row',
 		messagePlacementClass: 'form--mainbox',
 
 		// Used if the chosen message type is not supported
@@ -369,8 +371,8 @@
 	function FormElement () {}
 
 	FormElement.defaults = {
-		rowErrorClass: 'error',
-		rowValidClass: 'valid',
+		rowErrorClass: 'is-error',
+		rowValidClass: 'is-valid',
 		messageContainerClass: 'messages'
 	};
 
@@ -542,10 +544,13 @@
 			this.setNeutralState();
 
 			// Decide if the error should be showed
-			if (options.placeErrorsWhenInvalid && (this.validator.getIsProcessed() && $.inArray(errors[0], options.placeErrorsWhenInvalid) > -1)
-				|| (options.eventType === 'formSubmit' && this.formSubmitSettings && $.inArray(errors[0], this.formSubmitSettings.placeErrorsWhenInvalid)) ) {
-				// Place the error only when the first error in the stack triggers the error
 
+			// NOTE: Check formSubmitSettings
+			// if (options.placeErrorsWhenInvalid && (this.validator.getIsProcessed() && $.inArray(errors[0], options.placeErrorsWhenInvalid) > -1)
+			// 	|| (options.eventType === 'formSubmit' && this.formSubmitSettings && $.inArray(errors[0], this.formSubmitSettings.placeErrorsWhenInvalid)) ) {
+			if (options.placeErrorsWhenInvalid && (this.validator.getIsProcessed() && $.inArray(errors[0], options.placeErrorsWhenInvalid) > -1) || (options.eventType === 'formSubmit') ) {
+
+				// Place the error only when the first error in the stack triggers the error
 				if (this.settings.debug) {
 					console.log('(FormElement.validate)(debug): Place errors because errors[0] "' + errors[0] + '" is in options.placeErrorsWhenInvalid: ', options.placeErrorsWhenInvalid);
 				}
@@ -558,17 +563,18 @@
 
 			// Decide a note should be showed
 
-			if ((options.placeNoteWhenInvalid && $.inArray(errors[0], options.placeNoteWhenInvalid) > -1) || ( options.eventType === 'formSubmit' && this.formSubmitSettings && $.inArray(errors[0], this.formSubmitSettings.placeNoteWhenInvalid) ) ) {
-				// console.log(options.placeNoteWhenInvalid);
-				// Place the note only when the first error in the stack triggers the error
 
-				if (this.settings.debug) {
-					console.log('(FormElement.validate)(debug): Place note because errors[0] "' + errors[0] + '" is in options.placeNoteWhenInvalid: ', options.placeNoteWhenInvalid);
-				}
+			// To do: Fix Note function
+			// if ((options.placeNoteWhenInvalid && $.inArray(errors[0], options.placeNoteWhenInvalid) > -1) || ( options.eventType === 'formSubmit' && this.formSubmitSettings && $.inArray(errors[0], this.formSubmitSettings.placeNoteWhenInvalid) ) ) {
 
-				// Place only the most relevant error, first on the stack
-				this.placeNote( errors[0] );
-			}
+			// 	// Place the note only when the first error in the stack triggers the error
+			// 	if (this.settings.debug) {
+			// 		console.log('(FormElement.validate)(debug): Place note because errors[0] "' + errors[0] + '" is in options.placeNoteWhenInvalid: ', options.placeNoteWhenInvalid);
+			// 	}
+
+			// 	// Place only the most relevant error, first on the stack
+			// 	this.placeNote( errors[0] );
+			// }
 
 		} else {
 			// Change state only on validate

@@ -101,7 +101,7 @@
 		 */
 		length: function (value, minlength, maxlength) {
 			if (typeof minlength === 'number' && value.length < minlength) { return false; }
-			if (typeof maxlength === 'number' && value.length > maxlength) { return false; }
+			if (typeof maxlength === 'number' && maxlength > -1 && value.length > maxlength) { return false; }
 
 			return true;
 		},
